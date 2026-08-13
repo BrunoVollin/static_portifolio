@@ -44,6 +44,7 @@
         <a href="#sobre" data-i18n="nav_about" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Sobre</a>
         <a href="#projetos" data-i18n="nav_projects" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Projetos</a>
         <a href="#skills" data-i18n="nav_skills" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Skills</a>
+        <a href="#cursos" data-i18n="nav_courses" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Cursos</a>
         <a href="#experiencia" data-i18n="nav_experience" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Experiência</a>
         <a href="#contato" data-i18n="nav_contact" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Contato</a>
       </nav>
@@ -77,6 +78,7 @@
       <a href="#sobre" data-i18n="nav_about" class="hover:text-amber-600 dark:hover:text-amber-500">Sobre</a>
       <a href="#projetos" data-i18n="nav_projects" class="hover:text-amber-600 dark:hover:text-amber-500">Projetos</a>
       <a href="#skills" data-i18n="nav_skills" class="hover:text-amber-600 dark:hover:text-amber-500">Skills</a>
+      <a href="#cursos" data-i18n="nav_courses" class="hover:text-amber-600 dark:hover:text-amber-500">Cursos</a>
       <a href="#experiencia" data-i18n="nav_experience" class="hover:text-amber-600 dark:hover:text-amber-500">Experiência</a>
       <a href="#contato" data-i18n="nav_contact" class="hover:text-amber-600 dark:hover:text-amber-500">Contato</a>
     </nav>
@@ -293,11 +295,61 @@
   </section>
 
   <!-- ============================================================
+       CURSOS · Courses Taught
+       ============================================================ -->
+  <section id="cursos" class="border-t border-stone-200 dark:border-neutral-800">
+    <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+      <h2 data-i18n="heading_courses" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">04 · Cursos</h2>
+      <p data-i18n="courses_intro" class="text-stone-600 dark:text-stone-400 mb-8 max-w-2xl">
+        Durante a passagem pelo Inatel, atuei como professor assistente lecionando Laboratório de Banco de Dados 2 e Tópicos Especiais 1, além de ministrar os seguintes workshops técnicos:
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden">
+          <div class="course-carousel relative aspect-video bg-stone-200 dark:bg-neutral-800" data-carousel>
+            <img src="image/c1.jpg" alt="Introdução ao Desenvolvimento Mobile" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300" data-slide loading="lazy">
+            <img src="image/c2.jpg" alt="Introdução ao Desenvolvimento Mobile" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 pointer-events-none" data-slide loading="lazy">
+            <button type="button" data-prev aria-label="Anterior" class="absolute left-2 top-1/2 -translate-y-1/2 grid h-8 w-8 place-items-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">‹</button>
+            <button type="button" data-next aria-label="Próximo" class="absolute right-2 top-1/2 -translate-y-1/2 grid h-8 w-8 place-items-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">›</button>
+            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5" data-dots></div>
+          </div>
+          <div class="p-5">
+            <h3 data-i18n="course1_title" class="font-semibold text-lg">Introdução ao Desenvolvimento Mobile</h3>
+            <p data-i18n="course1_subtitle" class="text-sm text-stone-500 dark:text-stone-400 mt-1">Inatel · Secomp · Setembro de 2021</p>
+            <p data-i18n="course1_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-3">Introdução ao desenvolvimento mobile com Flutter e React Native.</p>
+          </div>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden">
+          <div class="course-carousel relative aspect-video bg-stone-200 dark:bg-neutral-800" data-carousel>
+            <video class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300" data-slide autoplay muted loop playsinline poster="image/im1.jpg">
+              <source src="image/img3.mp4" type="video/mp4">
+            </video>
+            <img src="image/im1.jpg" alt="Aplicações Mobile com React Native" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 pointer-events-none" data-slide loading="lazy">
+            <img src="image/img2.jpg" alt="Aplicações Mobile com React Native" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 pointer-events-none" data-slide loading="lazy">
+            <button type="button" data-prev aria-label="Anterior" class="absolute left-2 top-1/2 -translate-y-1/2 grid h-8 w-8 place-items-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">‹</button>
+            <button type="button" data-next aria-label="Próximo" class="absolute right-2 top-1/2 -translate-y-1/2 grid h-8 w-8 place-items-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">›</button>
+            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5" data-dots></div>
+          </div>
+          <div class="p-5">
+            <h3 data-i18n="course2_title" class="font-semibold text-lg">Aplicações Mobile com React Native</h3>
+            <p data-i18n="course2_subtitle" class="text-sm text-stone-500 dark:text-stone-400 mt-1">Inatel · Julho de 2022</p>
+            <p data-i18n="course2_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-3">State, Props, Components, Styling, Navigation, API, Redux, Hooks.</p>
+          </div>
+        </div>
+      </div>
+
+      <p data-i18n="courses_outro" class="mt-8 max-w-2xl text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+        Traduzir conceitos técnicos complexos em algo claro é uma habilidade que carrego do Inatel para o dia a dia: mentoria de devs mais júniores, documentação técnica em inglês para times internacionais e decisões arquiteturais que precisam ser entendidas por todo o time, não só por quem as escreveu.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
        EXPERIÊNCIA
        ============================================================ -->
   <section id="experiencia" class="border-t border-stone-200 dark:border-neutral-800 bg-stone-100/60 dark:bg-neutral-900/40">
     <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
-      <h2 data-i18n="heading_experience" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">04 · Experiência</h2>
+      <h2 data-i18n="heading_experience" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">05 · Experiência</h2>
 
       <ol class="mt-8 space-y-8 border-l border-stone-300 dark:border-neutral-700 pl-6">
         <li class="relative">
@@ -329,7 +381,7 @@
        ============================================================ -->
   <section id="contato" class="border-t border-stone-200 dark:border-neutral-800">
     <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
-      <h2 data-i18n="heading_contact" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">05 · Contato</h2>
+      <h2 data-i18n="heading_contact" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">06 · Contato</h2>
       <p data-i18n="contact_text" class="text-2xl md:text-3xl font-bold tracking-tight max-w-2xl mb-8">
         Aberto a oportunidades remotas de backend. Vamos conversar.
       </p>
@@ -486,6 +538,7 @@
         nav_about: 'Sobre',
         nav_projects: 'Projetos',
         nav_skills: 'Skills',
+        nav_courses: 'Cursos',
         nav_experience: 'Experiência',
         nav_contact: 'Contato',
         hero_subtitle: 'Backend Developer · Node.js, TypeScript, Sistemas Distribuídos &amp; IA Aplicada',
@@ -530,7 +583,16 @@
         heading_skills: '03 · Skills',
         skills_data_heading: 'Dados &amp; Mensageria',
         skills_ai_heading: 'IA / LLM',
-        heading_experience: '04 · Experiência',
+        heading_courses: '04 · Cursos',
+        courses_intro: 'Durante a passagem pelo Inatel, atuei como professor assistente lecionando Laboratório de Banco de Dados 2 e Tópicos Especiais 1, além de ministrar os seguintes workshops técnicos:',
+        course1_title: 'Introdução ao Desenvolvimento Mobile',
+        course1_subtitle: 'Inatel · Secomp · Setembro de 2021',
+        course1_desc: 'Introdução ao desenvolvimento mobile com Flutter e React Native.',
+        course2_title: 'Aplicações Mobile com React Native',
+        course2_subtitle: 'Inatel · Julho de 2022',
+        course2_desc: 'State, Props, Components, Styling, Navigation, API, Redux, Hooks.',
+        courses_outro: 'Traduzir conceitos técnicos complexos em algo claro é uma habilidade que carrego do Inatel para o dia a dia: mentoria de devs mais júniores, documentação técnica em inglês para times internacionais e decisões arquiteturais que precisam ser entendidas por todo o time, não só por quem as escreveu.',
+        heading_experience: '05 · Experiência',
         exp_mosyle_role: 'Software Engineer · Jun 2025 – Presente',
         exp_mosyle_desc: 'Plataforma de MDM para o ecossistema Apple (macOS/iOS/tvOS/visionOS) usada por 47 mil+ organizações; construiu soluções MCP em Python integrando OpenAI e Gemini, e um pipeline de RAG que reduziu em ~42% o atendimento manual de suporte.',
         exp_mei_role: 'Software Engineer · Nov 2023 – Jun 2025',
@@ -539,7 +601,7 @@
         exp_b2ml_desc: 'Aplicações fintech para uma startup brasileira de Open Finance (+USD 10M captados); sistemas de integração e conciliação bancária com Banco do Brasil, Nubank, Caixa Econômica, CEMIG e Copasa.',
         exp_inatel_role: 'Estágio em Engenharia de Software · Mai 2021 – Jul 2022',
         exp_inatel_desc: 'Desenvolvimento de aplicações internas com arquitetura escalável para otimizar processos acadêmicos e administrativos.',
-        heading_contact: '05 · Contato',
+        heading_contact: '06 · Contato',
         contact_text: 'Aberto a oportunidades remotas de backend. Vamos conversar.',
         email_label: 'E-mail',
         footer_text: '© 2026 Bruno Almeida Vasconcelos.'
@@ -550,6 +612,7 @@
         nav_about: 'About',
         nav_projects: 'Projects',
         nav_skills: 'Skills',
+        nav_courses: 'Courses',
         nav_experience: 'Experience',
         nav_contact: 'Contact',
         hero_subtitle: 'Backend Developer · Node.js, TypeScript, Distributed Systems &amp; Applied AI',
@@ -594,7 +657,16 @@
         heading_skills: '03 · Skills',
         skills_data_heading: 'Data &amp; Messaging',
         skills_ai_heading: 'AI / LLM',
-        heading_experience: '04 · Experience',
+        heading_courses: '04 · Courses',
+        courses_intro: 'While at Inatel, I worked as an assistant professor teaching Database Lab 2 and Special Topics 1, and ran the following technical workshops:',
+        course1_title: 'Introduction to Mobile Development',
+        course1_subtitle: 'Inatel · Secomp · September 2021',
+        course1_desc: 'Introduction to mobile development with Flutter and React Native.',
+        course2_title: 'Mobile Applications with React Native',
+        course2_subtitle: 'Inatel · July 2022',
+        course2_desc: 'State, Props, Components, Styling, Navigation, API, Redux, Hooks.',
+        courses_outro: 'Turning complex technical concepts into something clear is a skill I carried over from Inatel into day-to-day work: mentoring junior developers, writing technical documentation in English for international teams, and architectural decisions that need to make sense to the whole team, not just the person who wrote them.',
+        heading_experience: '05 · Experience',
         exp_mosyle_role: 'Software Engineer · Jun 2025 – Present',
         exp_mosyle_desc: 'MDM platform for the Apple ecosystem (macOS/iOS/tvOS/visionOS) used by 47,000+ organizations; built MCP solutions in Python integrating OpenAI and Gemini, and a RAG pipeline that reduced manual support handling by ~42%.',
         exp_mei_role: 'Software Engineer · Nov 2023 – Jun 2025',
@@ -603,7 +675,7 @@
         exp_b2ml_desc: 'Fintech applications for a Brazilian Open Finance startup (USD 10M+ raised); banking integration and reconciliation systems with Banco do Brasil, Nubank, Caixa Econômica, CEMIG, and Copasa.',
         exp_inatel_role: 'Software Engineering Intern · May 2021 – Jul 2022',
         exp_inatel_desc: 'Developed internal applications with scalable architecture to optimize academic and administrative processes.',
-        heading_contact: '05 · Contact',
+        heading_contact: '06 · Contact',
         contact_text: 'Open to remote backend opportunities. Let&rsquo;s talk.',
         email_label: 'Email',
         footer_text: '© 2026 Bruno Almeida Vasconcelos.'
@@ -675,6 +747,45 @@
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         reflectIcons();
         renderAllDiagrams(isDark);
+      });
+
+      // Carrossel de cursos
+      document.querySelectorAll('[data-carousel]').forEach(function (carousel) {
+        var slides = Array.prototype.slice.call(carousel.querySelectorAll('[data-slide]'));
+        var dotsWrap = carousel.querySelector('[data-dots]');
+        var prevBtn = carousel.querySelector('[data-prev]');
+        var nextBtn = carousel.querySelector('[data-next]');
+        var current = 0;
+
+        if (slides.length <= 1) {
+          if (prevBtn) prevBtn.classList.add('hidden');
+          if (nextBtn) nextBtn.classList.add('hidden');
+          return;
+        }
+
+        var dots = slides.map(function (_, i) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+          dot.className = 'h-1.5 w-1.5 rounded-full bg-white/60 transition-colors';
+          dot.addEventListener('click', function () { goTo(i); });
+          dotsWrap.appendChild(dot);
+          return dot;
+        });
+
+        function goTo(index) {
+          slides[current].classList.add('opacity-0', 'pointer-events-none');
+          dots[current].classList.remove('bg-white');
+          dots[current].classList.add('bg-white/60');
+          current = (index + slides.length) % slides.length;
+          slides[current].classList.remove('opacity-0', 'pointer-events-none');
+          dots[current].classList.add('bg-white');
+          dots[current].classList.remove('bg-white/60');
+        }
+
+        goTo(0);
+        prevBtn.addEventListener('click', function () { goTo(current - 1); });
+        nextBtn.addEventListener('click', function () { goTo(current + 1); });
       });
 
       // Menu mobile

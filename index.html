@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="meta_title">Bruno Almeida Vasconcelos · Backend Developer</title>
+  <meta name="description" data-i18n-content="meta_description" content="Backend Developer especializado em Node.js, TypeScript, NestJS, sistemas distribuídos e integrações com LLMs." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+    })();
+  </script>
+
+  <script>
+    window.SITE_CONFIG = {
+      githubLink: 'https://github.com/BrunoVollin',
+      linkedinLink: 'https://www.linkedin.com/in/brunovollin/',
+      email: 'oportunidades@brunoti.com'
+    };
+  </script>
+</head>
+
+<body class="bg-stone-50 text-stone-900 dark:bg-neutral-950 dark:text-stone-100 antialiased selection:bg-amber-300 selection:text-stone-900">
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <header class="sticky top-0 z-50 border-b border-stone-200 dark:border-neutral-800 bg-stone-50/90 dark:bg-neutral-950/90 backdrop-blur">
+    <div class="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="font-mono text-sm font-semibold tracking-tight">
+        bruno<span class="text-amber-600 dark:text-amber-500">@</span>backend
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#sobre" data-i18n="nav_about" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Sobre</a>
+        <a href="#projetos" data-i18n="nav_projects" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Projetos</a>
+        <a href="#skills" data-i18n="nav_skills" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Skills</a>
+        <a href="#experiencia" data-i18n="nav_experience" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Experiência</a>
+        <a href="#contato" data-i18n="nav_contact" class="hover:text-amber-600 dark:hover:text-amber-500 transition-colors">Contato</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div id="lang-toggle" class="flex items-center rounded-md border border-stone-300 dark:border-neutral-700 overflow-hidden text-xs font-mono">
+          <button type="button" data-lang="pt" class="px-2 py-1.5 transition-colors">PT</button>
+          <button type="button" data-lang="en" class="px-2 py-1.5 transition-colors">EN</button>
+        </div>
+
+        <button id="theme-toggle" type="button" aria-label="Alternar tema claro/escuro"
+          class="grid h-9 w-9 place-items-center rounded-md border border-stone-300 dark:border-neutral-700 hover:border-amber-500 transition-colors">
+          <svg id="icon-sun" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5M12 19.5V21M4.22 4.22l1.06 1.06M18.72 18.72l1.06 1.06M3 12h1.5M19.5 12H21M4.22 19.78l1.06-1.06M18.72 5.28l1.06-1.06M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/>
+          </svg>
+          <svg id="icon-moon" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+
+        <button id="menu-toggle" type="button" aria-label="Abrir menu" class="md:hidden grid h-9 w-9 place-items-center rounded-md border border-stone-300 dark:border-neutral-700">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- menu mobile -->
+    <nav id="mobile-menu" class="hidden md:hidden border-t border-stone-200 dark:border-neutral-800 px-6 py-4 flex flex-col gap-4 text-sm">
+      <a href="#sobre" data-i18n="nav_about" class="hover:text-amber-600 dark:hover:text-amber-500">Sobre</a>
+      <a href="#projetos" data-i18n="nav_projects" class="hover:text-amber-600 dark:hover:text-amber-500">Projetos</a>
+      <a href="#skills" data-i18n="nav_skills" class="hover:text-amber-600 dark:hover:text-amber-500">Skills</a>
+      <a href="#experiencia" data-i18n="nav_experience" class="hover:text-amber-600 dark:hover:text-amber-500">Experiência</a>
+      <a href="#contato" data-i18n="nav_contact" class="hover:text-amber-600 dark:hover:text-amber-500">Contato</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section id="hero" class="mx-auto max-w-5xl px-6 pt-16 pb-20 md:pt-24 md:pb-28">
+    <p class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-4">$ whoami</p>
+
+    <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]">
+      Bruno Almeida<br/>Vasconcelos
+    </h1>
+
+    <p data-i18n="hero_subtitle" class="mt-5 text-lg md:text-2xl font-medium text-stone-700 dark:text-stone-300 max-w-3xl">
+      Backend Developer · Node.js, TypeScript, Sistemas Distribuídos &amp; IA Aplicada
+    </p>
+
+    <p data-i18n="hero_paragraph" class="mt-6 max-w-2xl text-base md:text-lg text-stone-600 dark:text-stone-400 leading-relaxed">
+      Gosto de resolver problemas com fronteiras bem definidas: onde termina a
+      responsabilidade de um serviço, o que acontece quando uma mensagem se perde,
+      como um agente decide qual ferramenta chamar. Ao integrar LLMs em sistemas
+      distribuídos, penso nesses limites, não em features soltas.
+    </p>
+
+    <div class="mt-9 flex flex-wrap items-center gap-4">
+      <a id="github-link" href="#" target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 rounded-md bg-stone-900 dark:bg-amber-500 px-5 py-2.5 text-sm font-semibold text-stone-50 dark:text-neutral-950 hover:bg-stone-700 dark:hover:bg-amber-400 transition-colors">
+        GitHub
+      </a>
+      <a id="linkedin-link" href="#" target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 rounded-md border border-stone-300 dark:border-neutral-700 px-5 py-2.5 text-sm font-semibold hover:border-amber-500 hover:text-amber-600 dark:hover:text-amber-500 transition-colors">
+        LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SOBRE
+       ============================================================ -->
+  <section id="sobre" class="border-t border-stone-200 dark:border-neutral-800">
+    <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+      <h2 data-i18n="heading_about" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">01 · Sobre</h2>
+      <p data-i18n="about_text" class="max-w-3xl text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
+        ~4 anos construindo sistemas backend em produção, com passagem por
+        <strong class="text-stone-900 dark:text-stone-100">B2ML</strong>,
+        <strong class="text-stone-900 dark:text-stone-100">Meinteligente</strong> e
+        <strong class="text-stone-900 dark:text-stone-100">Mosyle</strong>:
+        de integrações bancárias em uma fintech de Open Finance a automação
+        contábil e, hoje, uma plataforma de MDM usada por 47 mil+ organizações.
+        Experiência real trabalhando remoto com times internacionais, incluindo
+        documentação técnica em inglês. Atualmente em busca de uma vaga remota
+        (nacional ou internacional) como desenvolvedor backend pleno/sênior.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJETOS · Case Studies
+       ============================================================ -->
+  <section id="projetos" class="border-t border-stone-200 dark:border-neutral-800 bg-stone-100/60 dark:bg-neutral-900/40">
+    <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+      <h2 data-i18n="heading_projects" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">02 · Projetos</h2>
+      <p data-i18n="projects_intro" class="text-stone-600 dark:text-stone-400 mb-12 max-w-2xl">
+        Dois projetos pessoais tratados como estudos de caso, não como uma
+        lista de repositórios. Escolhidos por profundidade arquitetural real,
+        não por polimento visual.
+      </p>
+
+      <!-- ---------------------------------------------------------
+           CASE STUDY 1 · Zoom Storm (destaque principal)
+           --------------------------------------------------------- -->
+      <article class="mb-20">
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+          <div>
+            <span data-i18n="case1_badge" class="inline-block text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-2">
+              Case study principal
+            </span>
+            <h3 class="text-3xl md:text-4xl font-bold tracking-tight">Zoom Storm</h3>
+          </div>
+          <a href="https://github.com/BrunoVollin/zoom_storm" target="_blank" rel="noopener"
+            data-i18n="cta_repo"
+            class="inline-flex items-center gap-2 rounded-md border border-stone-300 dark:border-neutral-700 px-4 py-2 text-sm font-semibold hover:border-amber-500 hover:text-amber-600 dark:hover:text-amber-500 transition-colors">
+            Ver repositório →
+          </a>
+        </div>
+
+        <p data-i18n="case1_desc" class="text-lg md:text-xl text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl mb-8">
+          Plataforma de marketplace construída como um
+          <strong>monorepo de microsserviços em TypeScript</strong>, seguindo
+          <strong>Clean Architecture</strong> por serviço e um padrão
+          <strong>CQRS + Event-Driven</strong> com projeções assíncronas via Kafka.
+        </p>
+
+        <!-- Badges de stack -->
+        <div class="flex flex-wrap gap-2 mb-10">
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">TypeScript</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Next.js</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Hono</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Kafka / KafkaJS</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">PostgreSQL + Prisma</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">MongoDB</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Redis</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Keycloak (OIDC/JWT)</span>
+          <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Docker Compose</span>
+        </div>
+
+        <!-- Arquitetura -->
+        <div class="mb-10">
+          <h4 data-i18n="heading_arch" class="font-semibold text-sm uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-3">Arquitetura</h4>
+          <div id="zoom-storm-diagram" class="rounded-lg border border-stone-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 overflow-x-auto"></div>
+        </div>
+
+        <!-- Componentes -->
+        <div class="mb-10">
+          <h4 data-i18n="heading_components" class="font-semibold text-sm uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-4">Componentes principais</h4>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+              <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">apps/web</p>
+              <p data-i18n="case1_comp_web_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Storefront do marketplace em Next.js (App Router), SSR + React Query.</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+              <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">apps/bff</p>
+              <p data-i18n="case1_comp_bff_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">BFF em Hono: autenticação OIDC via Keycloak, sessão em Redis, injeta Bearer token nas chamadas ao gateway.</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+              <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">apps/api-gateway</p>
+              <p data-i18n="case1_comp_gateway_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Roteamento interno para <code>cart-service</code> e <code>products-service</code>.</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+              <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">cart-service / products-service</p>
+              <p data-i18n="case1_comp_services_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Serviços de domínio (carrinho e catálogo do marketplace) em Hono + Clean Architecture; escrevem em Postgres via Prisma e publicam eventos no Kafka.</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+              <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">*-projection (workers)</p>
+              <p data-i18n="case1_comp_projection_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1"><code>cart-projection</code>, <code>products-projection</code>, <code>cart-products-projection</code> consomem eventos do Kafka e materializam os read models em MongoDB.</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+              <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">OutboxRelay</p>
+              <p data-i18n="case1_comp_outbox_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Tabela <code>OutboxEvent</code> gravada na mesma transação da escrita; um worker publica no Kafka e marca <code>publishedAt</code>, garantindo entrega at-least-once em vez de dual-write.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decisões técnicas / trade-offs -->
+        <div class="mb-10">
+          <h4 data-i18n="heading_decisions" class="font-semibold text-sm uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-3">Decisões técnicas &amp; trade-offs</h4>
+          <ul class="space-y-2 text-stone-700 dark:text-stone-300 text-sm leading-relaxed list-disc list-inside">
+            <li data-i18n="case1_decision_1"><strong>CQRS com bancos separados</strong>: escrita em PostgreSQL (Prisma), leitura em MongoDB, sincronizados por eventos Kafka + workers de projeção.</li>
+            <li data-i18n="case1_decision_2"><strong>Outbox pattern</strong> em vez de dual-write direto: evita inconsistência entre a escrita transacional e a publicação do evento.</li>
+            <li data-i18n="case1_decision_3"><strong>Cart-service replica o catálogo de produtos</strong> via <code>cart-products-projection</code> em vez de chamar <code>products-service</code> de forma síncrona, evitando acoplamento e latência entre domínios no momento da leitura.</li>
+            <li data-i18n="case1_decision_4"><strong>BFF pattern</strong>: o navegador nunca fala diretamente com o gateway; o BFF guarda o token em Redis e injeta o header <code>Authorization</code> no servidor.</li>
+          </ul>
+        </div>
+      </article>
+
+
+  <!-- ============================================================
+       SKILLS
+       ============================================================ -->
+  <section id="skills" class="border-t border-stone-200 dark:border-neutral-800">
+    <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+      <h2 data-i18n="heading_skills" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">03 · Skills</h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-3">Backend</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Node.js</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">NestJS</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">TypeScript</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Express</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Python</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">GraphQL</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 data-i18n="skills_data_heading" class="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-3">Dados &amp; Mensageria</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Kafka</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">RabbitMQ</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">PostgreSQL</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">MongoDB</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Redis</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 data-i18n="skills_ai_heading" class="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-3">IA / LLM</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">RAG</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">MCP</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">OpenAI</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Google Gemini</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Vector Databases</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Prompt Engineering</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400 mb-3">DevOps / Infra</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Docker</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Kubernetes</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">CI/CD</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">AWS / GCP</span>
+            <span class="rounded-md bg-stone-100 dark:bg-neutral-900 border border-stone-200 dark:border-neutral-800 px-2.5 py-1 text-sm">Linux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIÊNCIA
+       ============================================================ -->
+  <section id="experiencia" class="border-t border-stone-200 dark:border-neutral-800 bg-stone-100/60 dark:bg-neutral-900/40">
+    <div class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+      <h2 data-i18n="heading_experience" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">04 · Experiência</h2>
+
+      <ol class="mt-8 space-y-8 border-l border-stone-300 dark:border-neutral-700 pl-6">
+        <li class="relative">
+          <span class="absolute -left-[27px] top-1.5 h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+          <p class="font-semibold">Mosyle <span data-i18n="exp_mosyle_role" class="font-normal text-stone-500 dark:text-stone-400 text-sm">Software Engineer · Jun 2025 – Presente</span></p>
+          <p data-i18n="exp_mosyle_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Plataforma de MDM para o ecossistema Apple (macOS/iOS/tvOS/visionOS) usada por 47 mil+ organizações; construiu soluções MCP em Python integrando OpenAI e Gemini, e um pipeline de RAG que reduziu em ~42% o atendimento manual de suporte.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-[27px] top-1.5 h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+          <p class="font-semibold">Meinteligente <span data-i18n="exp_mei_role" class="font-normal text-stone-500 dark:text-stone-400 text-sm">Software Engineer · Nov 2023 – Jun 2025</span></p>
+          <p data-i18n="exp_mei_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">APIs de automação de processos contábeis com Node.js, NestJS, Redis, RabbitMQ e jobs distribuídos; OCR com Tesseract para processamento de documentos fiscais, reduzindo esforço manual em 80%.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-[27px] top-1.5 h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+          <p class="font-semibold">B2ML <span data-i18n="exp_b2ml_role" class="font-normal text-stone-500 dark:text-stone-400 text-sm">Software Engineer · Jul 2022 – Out 2023</span></p>
+          <p data-i18n="exp_b2ml_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Aplicações fintech para uma startup brasileira de Open Finance (+USD 10M captados); sistemas de integração e conciliação bancária com Banco do Brasil, Nubank, Caixa Econômica, CEMIG e Copasa.</p>
+        </li>
+        <li class="relative">
+          <span class="absolute -left-[27px] top-1.5 h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+          <p class="font-semibold">Inatel <span data-i18n="exp_inatel_role" class="font-normal text-stone-500 dark:text-stone-400 text-sm">Estágio em Engenharia de Software · Mai 2021 – Jul 2022</span></p>
+          <p data-i18n="exp_inatel_desc" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Desenvolvimento de aplicações internas com arquitetura escalável para otimizar processos acadêmicos e administrativos.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTATO
+       ============================================================ -->
+  <section id="contato" class="border-t border-stone-200 dark:border-neutral-800">
+    <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
+      <h2 data-i18n="heading_contact" class="font-mono text-sm text-amber-600 dark:text-amber-500 mb-3">05 · Contato</h2>
+      <p data-i18n="contact_text" class="text-2xl md:text-3xl font-bold tracking-tight max-w-2xl mb-8">
+        Aberto a oportunidades remotas de backend. Vamos conversar.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a id="email-link" href="#" data-i18n="email_label" class="inline-flex items-center gap-2 rounded-md bg-stone-900 dark:bg-amber-500 px-5 py-2.5 text-sm font-semibold text-stone-50 dark:text-neutral-950 hover:bg-stone-700 dark:hover:bg-amber-400 transition-colors">
+          E-mail
+        </a>
+        <a id="linkedin-link-2" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-md border border-stone-300 dark:border-neutral-700 px-5 py-2.5 text-sm font-semibold hover:border-amber-500 hover:text-amber-600 dark:hover:text-amber-500 transition-colors">
+          LinkedIn
+        </a>
+        <a id="github-link-2" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-md border border-stone-300 dark:border-neutral-700 px-5 py-2.5 text-sm font-semibold hover:border-amber-500 hover:text-amber-600 dark:hover:text-amber-500 transition-colors">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-stone-200 dark:border-neutral-800">
+    <div data-i18n="footer_text" class="mx-auto max-w-5xl px-6 py-8 text-sm text-stone-500 dark:text-stone-500 font-mono">
+      © 2026 Bruno Almeida Vasconcelos.
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JS · i18n, dark mode, menu mobile, preenchimento de links
+       ============================================================ -->
+  <script>
+    var ZOOM_STORM_DIAGRAM = 'flowchart TB\n' +
+      '    subgraph Browser\n' +
+      '        WEB[apps/web - Next.js]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Edge\n' +
+      '        NEXTAPI["Next.js /api/* route handlers"]\n' +
+      '        BFF[apps/bff - Hono + Redis + Keycloak]\n' +
+      '    end\n' +
+      '\n' +
+      '    GW[apps/api-gateway]\n' +
+      '\n' +
+      '    subgraph Domain\n' +
+      '        CART[apps/cart-service]\n' +
+      '        PROD[apps/products-service]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Write\n' +
+      '        PG[(PostgreSQL zoom)]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Messaging\n' +
+      '        KAFKA{{Kafka}}\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Projections\n' +
+      '        CPROJ[cart-projection]\n' +
+      '        PPROJ[products-projection]\n' +
+      '        CPPROJ[cart-products-projection]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Read\n' +
+      '        MCART[(Mongo zoom-cart)]\n' +
+      '        MPROD[(Mongo zoom-products)]\n' +
+      '    end\n' +
+      '\n' +
+      '    KC[Keycloak]\n' +
+      '    REDIS[(Redis)]\n' +
+      '\n' +
+      '    WEB -->|same-origin cookie| NEXTAPI --> BFF\n' +
+      '    BFF -->|Bearer JWT| GW\n' +
+      '    BFF <--> REDIS\n' +
+      '    BFF <--> KC\n' +
+      '    GW -->|/cart/*| CART\n' +
+      '    GW -->|/products/*| PROD\n' +
+      '\n' +
+      '    CART -->|write + outbox| PG\n' +
+      '    CART -->|read| MCART\n' +
+      '    CART -.produces cart-events / checkout-events.-> KAFKA\n' +
+      '\n' +
+      '    PROD -->|write + outbox| PG\n' +
+      '    PROD -->|read| MPROD\n' +
+      '    PROD -.produces product-events.-> KAFKA\n' +
+      '\n' +
+      '    KAFKA -->|cart-events / checkout-events| CPROJ --> MCART\n' +
+      '    KAFKA -->|product-events| PPROJ --> MPROD\n' +
+      '    KAFKA -->|product-events| CPPROJ --> MCART\n' +
+      '\n' +
+      '    CART -->|enriches items by reading products| MCART\n';
+
+    var BEER_OCR_DIAGRAM = 'flowchart TB\n' +
+      '    subgraph Client\n' +
+      '        USER[HTTP Client]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Gateway[gateway_api - NestJS]\n' +
+      '        CTRL[UploadController - POST /upload]\n' +
+      '        UC[ExtractBrandFromImageUseCase]\n' +
+      '        GWY[OCRGateway - gRPC client]\n' +
+      '        REPO[ImageAnalysisRepositoryPostgres]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph OCR[ocr_api - Python]\n' +
+      '        GRPCSRV[OCRService - gRPC server]\n' +
+      '        DETECT[DetectBrand]\n' +
+      '        DETECTOR[PytesseractDetector - ORB + BFMatcher]\n' +
+      '        DATASET[(dataset: brahma, spaten, corona)]\n' +
+      '    end\n' +
+      '\n' +
+      '    PG[(PostgreSQL - ImageAnalysis)]\n' +
+      '\n' +
+      '    USER -->|POST /upload multipart file| CTRL\n' +
+      '    CTRL --> UC\n' +
+      '    UC --> GWY\n' +
+      '    GWY -->|gRPC ProcessImage image + file_name + mime_type| GRPCSRV\n' +
+      '    GRPCSRV --> DETECT\n' +
+      '    DETECT --> DETECTOR\n' +
+      '    DETECTOR -->|ORB keypoints + BFMatcher Hamming| DATASET\n' +
+      '    DETECTOR -->|brand name| DETECT\n' +
+      '    DETECT -->|brand| GRPCSRV\n' +
+      '    GRPCSRV -->|ImageResponse brand| GWY\n' +
+      '    GWY -->|brand| UC\n' +
+      '    UC --> REPO\n' +
+      '    REPO -->|save data + brand + requestedAt| PG\n' +
+      '    UC -->|200 brandName JSON| CTRL\n';
+
+    function renderMermaidDiagram(containerId, diagramSource, isDark) {
+      var container = document.getElementById(containerId);
+      if (!container || typeof mermaid === 'undefined') return;
+      container.innerHTML = '<pre class="mermaid">' + diagramSource + '</pre>';
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isDark ? 'dark' : 'base',
+        themeVariables: {
+          primaryColor: isDark ? '#292524' : '#fef3c7',
+          primaryTextColor: isDark ? '#f5f5f4' : '#1c1917',
+          primaryBorderColor: '#d97706',
+          lineColor: isDark ? '#a8a29e' : '#78716c',
+          tertiaryColor: isDark ? '#171717' : '#f5f5f4',
+          fontFamily: 'ui-monospace, monospace',
+          fontSize: '13px'
+        }
+      });
+      mermaid.run({ querySelector: '#' + containerId + ' .mermaid' });
+    }
+
+    function renderAllDiagrams(isDark) {
+      renderMermaidDiagram('zoom-storm-diagram', ZOOM_STORM_DIAGRAM, isDark);
+      renderMermaidDiagram('beer-ocr-diagram', BEER_OCR_DIAGRAM, isDark);
+    }
+
+    var I18N = {
+      pt: {
+        meta_title: 'Bruno Almeida Vasconcelos · Backend Developer',
+        meta_description: 'Backend Developer especializado em Node.js, TypeScript, NestJS, sistemas distribuídos e integrações com LLMs.',
+        nav_about: 'Sobre',
+        nav_projects: 'Projetos',
+        nav_skills: 'Skills',
+        nav_experience: 'Experiência',
+        nav_contact: 'Contato',
+        hero_subtitle: 'Backend Developer · Node.js, TypeScript, Sistemas Distribuídos &amp; IA Aplicada',
+        hero_paragraph: 'Gosto de resolver problemas com fronteiras bem definidas: onde termina a responsabilidade de um serviço, o que acontece quando uma mensagem se perde, como um agente decide qual ferramenta chamar. Ao integrar LLMs em sistemas distribuídos, penso nesses limites, não em features soltas.',
+        heading_about: '01 · Sobre',
+        about_text: '~4 anos construindo sistemas backend em produção, com passagem por <strong class="text-stone-900 dark:text-stone-100">B2ML</strong>, <strong class="text-stone-900 dark:text-stone-100">Meinteligente</strong> e <strong class="text-stone-900 dark:text-stone-100">Mosyle</strong>: de integrações bancárias em uma fintech de Open Finance a automação contábil e, hoje, uma plataforma de MDM usada por 47 mil+ organizações. Experiência real trabalhando remoto com times internacionais, incluindo documentação técnica em inglês. Atualmente em busca de uma vaga remota (nacional ou internacional) como desenvolvedor backend pleno/sênior.',
+        heading_projects: '02 · Projetos',
+        projects_intro: '',
+        case1_badge: 'Case study principal',
+        cta_repo: 'Ver repositório →',
+        case1_desc: 'Plataforma de marketplace construída como um <strong>monorepo de microsserviços em TypeScript</strong>, seguindo <strong>Clean Architecture</strong> por serviço e um padrão <strong>CQRS + Event-Driven</strong> com projeções assíncronas via Kafka.',
+        heading_arch: 'Arquitetura',
+        heading_components: 'Componentes principais',
+        case1_comp_web_desc: 'Storefront do marketplace em Next.js (App Router), SSR + React Query.',
+        case1_comp_bff_desc: 'BFF em Hono: autenticação OIDC via Keycloak, sessão em Redis, injeta Bearer token nas chamadas ao gateway.',
+        case1_comp_gateway_desc: 'Roteamento interno para <code>cart-service</code> e <code>products-service</code>.',
+        case1_comp_services_desc: 'Serviços de domínio (carrinho e catálogo do marketplace) em Hono + Clean Architecture; escrevem em Postgres via Prisma e publicam eventos no Kafka.',
+        case1_comp_projection_desc: '<code>cart-projection</code>, <code>products-projection</code>, <code>cart-products-projection</code> consomem eventos do Kafka e materializam os read models em MongoDB.',
+        case1_comp_outbox_desc: 'Tabela <code>OutboxEvent</code> gravada na mesma transação da escrita; um worker publica no Kafka e marca <code>publishedAt</code>, garantindo entrega at-least-once em vez de dual-write.',
+        heading_decisions: 'Decisões técnicas &amp; trade-offs',
+        case1_decision_1: '<strong>CQRS com bancos separados</strong>: escrita em PostgreSQL (Prisma), leitura em MongoDB, sincronizados por eventos Kafka + workers de projeção.',
+        case1_decision_2: '<strong>Outbox pattern</strong> em vez de dual-write direto: evita inconsistência entre a escrita transacional e a publicação do evento.',
+        case1_decision_3: '<strong>Cart-service replica o catálogo de produtos</strong> via <code>cart-products-projection</code> em vez de chamar <code>products-service</code> de forma síncrona, evitando acoplamento e latência entre domínios no momento da leitura.',
+        case1_decision_4: '<strong>BFF pattern</strong>: o navegador nunca fala diretamente com o gateway; o BFF guarda o token em Redis e injeta o header <code>Authorization</code> no servidor.',
+        heading_challenges: 'Desafios técnicos',
+        case1_challenge_1: '<strong>Gerenciamento dos bancos de leitura e escrita</strong>: Postgres (escrita) e MongoDB (leitura) evoluem de forma assíncrona via Kafka; foi preciso lidar com a janela de consistência eventual entre os dois e garantir que os workers de projeção sejam idempotentes, já que o Kafka entrega mensagens em modelo at-least-once e pode reprocessar o mesmo evento mais de uma vez.',
+        case1_challenge_2: '<strong>Alta disponibilidade e resiliência a falhas</strong>: se um worker de projeção cai, o consumo precisa retomar do último offset commitado no Kafka sem perda de eventos; o Outbox Relay existe justamente para evitar que uma falha entre a escrita no Postgres e a publicação no Kafka deixe o sistema em estado inconsistente.',
+        case1_challenge_3: '<strong>Ordenação de eventos por agregado</strong>: <code>cart-events</code> e <code>checkout-events</code> do mesmo carrinho precisam ser processados na ordem correta pelo <code>cart-projection</code>; eventos fora de ordem exigem particionamento por chave de agregação no Kafka para preservar a ordem por carrinho.',
+        case1_challenge_4: '<strong>Defasagem na replicação do catálogo</strong>: o <code>cart-products-projection</code> mantém uma cópia do catálogo dentro do banco do <code>cart-service</code> para evitar chamadas síncronas ao <code>products-service</code>; isso introduz uma janela entre uma mudança no catálogo e sua propagação para o carrinho, avaliada como trade-off aceitável.',
+        case1_challenge_5: '<strong>Sessão coordenada entre BFF, Redis e Keycloak</strong>: o BFF depende do Redis para a sessão e do Keycloak para os tokens OIDC; renovação de token expirado e invalidação de sessão exigem coordenação entre os dois para não deixar o usuário com uma sessão válida no Redis mas com token já expirado no Keycloak.',
+        case2_desc: 'Automatiza a verificação de marcas de cerveja em ambiente industrial: uma imagem é enviada, um serviço de OCR identifica a marca e o resultado é persistido para consulta futura, reduzindo erro humano e trabalho manual no processo.',
+        case2_comp_ocr_desc: 'Servidor gRPC em Python que recebe uma imagem e retorna a marca identificada (Brahma, Spaten ou Corona).',
+        case2_comp_gateway_desc: 'API REST em NestJS com a rota <code>/upload</code>: recebe o arquivo, chama o <code>ocr_api</code> via gRPC e persiste o resultado da consulta em PostgreSQL.',
+        case2_decision_1: '<strong>gRPC entre gateway e serviço de OCR</strong>: comunicação binária via Protocol Buffers (<code>ocr.proto</code>) entre <code>gateway_api</code> (NestJS) e <code>ocr_api</code> (Python), evitando o overhead de serializar imagens em base64/JSON que uma REST API teria.',
+        case2_decision_2: '<strong>Reconhecimento por correspondência visual, não OCR textual</strong>: apesar do nome, o <code>PytesseractDetector</code> não lê texto com Tesseract; ele extrai keypoints ORB da imagem e compara com um dataset de imagens de referência (Brahma, Spaten, Corona) via Brute-Force Matcher (distância de Hamming), retornando a marca com mais correspondências.',
+        case2_decision_3: '<strong>Dois entrypoints no ocr_api</strong>: além do servidor gRPC usado em produção (<code>grpc_server.py</code>), o serviço expõe uma API REST alternativa via FastAPI (<code>rest_server.py</code>) para testar o reconhecimento isoladamente, sem depender do gateway NestJS.',
+        case2_decision_4: '<strong>Imagem persistida como binário no Postgres</strong>: cada consulta salva o buffer da imagem, a marca detectada e o timestamp na tabela <code>ImageAnalysis</code> via Prisma, criando um histórico auditável ao custo de armazenar blobs direto no banco relacional em vez de um object storage dedicado.',
+        case2_challenge_1: '<strong>Precisão dependente do dataset de referência</strong>: como a detecção compara ORB descriptors contra um conjunto fixo de poucas dezenas de imagens por marca, variações de ângulo, iluminação ou embalagem não presentes no dataset reduzem a precisão, diferente de um modelo treinado que generalizaria melhor.',
+        case2_challenge_2: '<strong>Dataset acoplado à imagem Docker</strong>: as fotos de referência ficam dentro do próprio repositório (<code>ocr_api/src/infrastructure/detectors/dataset</code>); adicionar uma nova marca exige rebuild do container, sem mecanismo de atualização em runtime.',
+        case2_challenge_3: '<strong>Contrato gRPC duplicado manualmente</strong>: o arquivo <code>ocr.proto</code> existe em cópias separadas em <code>gateway_api</code> e <code>ocr_api</code>; mantê-las sincronizadas é responsabilidade manual, com risco de divergência de contrato entre os dois serviços.',
+        case2_challenge_4: '<strong>Processamento síncrono e bloqueante</strong>: a requisição de upload aguarda o matching completo contra todo o dataset antes de responder, com o servidor gRPC limitado a um pool fixo de 10 threads (<code>ThreadPoolExecutor(max_workers=10)</code>), um teto de concorrência que pode virar gargalo sob carga.',
+        heading_skills: '03 · Skills',
+        skills_data_heading: 'Dados &amp; Mensageria',
+        skills_ai_heading: 'IA / LLM',
+        heading_experience: '04 · Experiência',
+        exp_mosyle_role: 'Software Engineer · Jun 2025 – Presente',
+        exp_mosyle_desc: 'Plataforma de MDM para o ecossistema Apple (macOS/iOS/tvOS/visionOS) usada por 47 mil+ organizações; construiu soluções MCP em Python integrando OpenAI e Gemini, e um pipeline de RAG que reduziu em ~42% o atendimento manual de suporte.',
+        exp_mei_role: 'Software Engineer · Nov 2023 – Jun 2025',
+        exp_mei_desc: 'APIs de automação de processos contábeis com Node.js, NestJS, Redis, RabbitMQ e jobs distribuídos; OCR com Tesseract para processamento de documentos fiscais, reduzindo esforço manual em 80%.',
+        exp_b2ml_role: 'Software Engineer · Jul 2022 – Out 2023',
+        exp_b2ml_desc: 'Aplicações fintech para uma startup brasileira de Open Finance (+USD 10M captados); sistemas de integração e conciliação bancária com Banco do Brasil, Nubank, Caixa Econômica, CEMIG e Copasa.',
+        exp_inatel_role: 'Estágio em Engenharia de Software · Mai 2021 – Jul 2022',
+        exp_inatel_desc: 'Desenvolvimento de aplicações internas com arquitetura escalável para otimizar processos acadêmicos e administrativos.',
+        heading_contact: '05 · Contato',
+        contact_text: 'Aberto a oportunidades remotas de backend. Vamos conversar.',
+        email_label: 'E-mail',
+        footer_text: '© 2026 Bruno Almeida Vasconcelos.'
+      },
+      en: {
+        meta_title: 'Bruno Almeida Vasconcelos · Backend Developer',
+        meta_description: 'Backend Developer specialized in Node.js, TypeScript, NestJS, distributed systems, and LLM integrations.',
+        nav_about: 'About',
+        nav_projects: 'Projects',
+        nav_skills: 'Skills',
+        nav_experience: 'Experience',
+        nav_contact: 'Contact',
+        hero_subtitle: 'Backend Developer · Node.js, TypeScript, Distributed Systems &amp; Applied AI',
+        hero_paragraph: 'I like solving problems with well-defined boundaries: where a service&rsquo;s responsibility ends, what happens when a message gets lost, how an agent decides which tool to call. When integrating LLMs into distributed systems, I think about these boundaries, not loose features.',
+        heading_about: '01 · About',
+        about_text: '~4 years building backend systems in production, with experience at <strong class="text-stone-900 dark:text-stone-100">B2ML</strong>, <strong class="text-stone-900 dark:text-stone-100">Meinteligente</strong>, and <strong class="text-stone-900 dark:text-stone-100">Mosyle</strong>: from banking integrations at a Brazilian Open Finance fintech to accounting automation, and today, an MDM platform used by 47,000+ organizations. Real remote experience working with international teams, including technical documentation in English. Currently looking for a remote backend role (domestic or international), mid to senior level.',
+        heading_projects: '02 · Projects',
+        projects_intro: 'Two personal projects treated as case studies, not as a list of repositories. Chosen for real architectural depth, not visual polish.',
+        case1_badge: 'Main case study',
+        cta_repo: 'View repository →',
+        case1_desc: 'Marketplace platform (current and retro games) built as a <strong>TypeScript microservices monorepo</strong>, following <strong>Clean Architecture</strong> per service and a <strong>CQRS + Event-Driven</strong> pattern with asynchronous projections via Kafka.',
+        heading_arch: 'Architecture',
+        heading_components: 'Main components',
+        case1_comp_web_desc: 'Marketplace storefront built with Next.js (App Router), SSR + React Query.',
+        case1_comp_bff_desc: 'BFF built with Hono: OIDC authentication via Keycloak, Redis-backed session, injects the Bearer token into gateway calls.',
+        case1_comp_gateway_desc: 'Internal routing to <code>cart-service</code> and <code>products-service</code>.',
+        case1_comp_services_desc: 'Domain services (cart and marketplace catalog) built with Hono + Clean Architecture; write to Postgres via Prisma and publish events to Kafka.',
+        case1_comp_projection_desc: '<code>cart-projection</code>, <code>products-projection</code>, and <code>cart-products-projection</code> consume Kafka events and materialize the read models in MongoDB.',
+        case1_comp_outbox_desc: 'The <code>OutboxEvent</code> table is written in the same transaction as the write; a worker publishes to Kafka and marks <code>publishedAt</code>, guaranteeing at-least-once delivery instead of dual-write.',
+        heading_decisions: 'Technical decisions &amp; trade-offs',
+        case1_decision_1: '<strong>CQRS with separate databases</strong>: writes to PostgreSQL (Prisma), reads from MongoDB, synchronized via Kafka events + projection workers.',
+        case1_decision_2: '<strong>Outbox pattern</strong> instead of direct dual-write: avoids inconsistency between the transactional write and the event publication.',
+        case1_decision_3: '<strong>Cart-service replicates the product catalog</strong> via <code>cart-products-projection</code> instead of calling <code>products-service</code> synchronously, avoiding coupling and latency between domains at read time.',
+        case1_decision_4: '<strong>BFF pattern</strong>: the browser never talks directly to the gateway; the BFF stores the token in Redis and injects the <code>Authorization</code> header server-side.',
+        heading_challenges: 'Technical challenges',
+        case1_challenge_1: '<strong>Managing separate read and write databases</strong>: PostgreSQL (write) and MongoDB (read) evolve asynchronously via Kafka; this required handling the eventual consistency window between the two and making projection workers idempotent, since Kafka delivers messages at-least-once and can redeliver the same event more than once.',
+        case1_challenge_2: '<strong>High availability and fault tolerance</strong>: if a projection worker goes down, consumption must resume from the last committed Kafka offset without losing events; the Outbox Relay exists precisely to prevent a failure between the PostgreSQL write and the Kafka publish from leaving the system in an inconsistent state.',
+        case1_challenge_3: '<strong>Per-aggregate event ordering</strong>: <code>cart-events</code> and <code>checkout-events</code> for the same cart must be processed in the correct order by <code>cart-projection</code>; out-of-order events require partitioning by aggregate key in Kafka to preserve per-cart ordering.',
+        case1_challenge_4: '<strong>Catalog replication lag</strong>: <code>cart-products-projection</code> keeps a copy of the catalog inside the <code>cart-service</code> database to avoid synchronous calls to <code>products-service</code>; this introduces a window between a catalog change and its propagation to the cart, accepted as a deliberate trade-off.',
+        case1_challenge_5: '<strong>Coordinated session across BFF, Redis, and Keycloak</strong>: the BFF depends on Redis for the session and on Keycloak for OIDC tokens; expired-token renewal and session invalidation require coordination between the two to avoid a session that is still valid in Redis but already expired in Keycloak.',
+        case2_desc: 'Automates beer brand verification in an industrial setting: an image is sent, an OCR service identifies the brand, and the result is stored for future lookup, reducing human error and manual work in the process.',
+        case2_comp_ocr_desc: 'Python gRPC server that receives an image and returns the identified brand (Brahma, Spaten, or Corona).',
+        case2_comp_gateway_desc: 'NestJS REST API with the <code>/upload</code> route: receives the file, calls <code>ocr_api</code> via gRPC, and persists the query result in PostgreSQL.',
+        case2_decision_1: '<strong>gRPC between gateway and OCR service</strong>: binary communication via Protocol Buffers (<code>ocr.proto</code>) between <code>gateway_api</code> (NestJS) and <code>ocr_api</code> (Python), avoiding the overhead of serializing images as base64/JSON that a REST API would require.',
+        case2_decision_2: '<strong>Visual feature matching, not textual OCR</strong>: despite its name, <code>PytesseractDetector</code> does not read text with Tesseract; it extracts ORB keypoints from the image and compares them against a dataset of reference images (Brahma, Spaten, Corona) via a Brute-Force Matcher (Hamming distance), returning the brand with the most matches.',
+        case2_decision_3: '<strong>Two entrypoints in ocr_api</strong>: besides the gRPC server used in production (<code>grpc_server.py</code>), the service exposes an alternative REST API via FastAPI (<code>rest_server.py</code>) to test the recognition logic in isolation, without depending on the NestJS gateway.',
+        case2_decision_4: '<strong>Image persisted as binary in Postgres</strong>: each query saves the image buffer, the detected brand, and the request timestamp in the <code>ImageAnalysis</code> table via Prisma, creating an auditable history at the cost of storing binary blobs directly in the relational database instead of dedicated object storage.',
+        case2_challenge_1: '<strong>Accuracy depends on the reference dataset</strong>: since detection compares ORB descriptors against a fixed set of a few dozen images per brand, angle, lighting, or packaging variations not present in the dataset reduce accuracy, unlike a trained model that would generalize better.',
+        case2_challenge_2: '<strong>Dataset coupled to the Docker image</strong>: reference photos live inside the repository itself (<code>ocr_api/src/infrastructure/detectors/dataset</code>); adding a new brand requires rebuilding the container, with no runtime dataset update mechanism.',
+        case2_challenge_3: '<strong>Manually duplicated gRPC contract</strong>: the <code>ocr.proto</code> file exists as separate copies in <code>gateway_api</code> and <code>ocr_api</code>; keeping them in sync is a manual responsibility, with a risk of contract drift between the two services.',
+        case2_challenge_4: '<strong>Synchronous, blocking processing</strong>: the upload request waits for matching against the entire dataset to complete before responding, with the gRPC server capped at a fixed pool of 10 threads (<code>ThreadPoolExecutor(max_workers=10)</code>), a concurrency ceiling that can become a bottleneck under load.',
+        heading_skills: '03 · Skills',
+        skills_data_heading: 'Data &amp; Messaging',
+        skills_ai_heading: 'AI / LLM',
+        heading_experience: '04 · Experience',
+        exp_mosyle_role: 'Software Engineer · Jun 2025 – Present',
+        exp_mosyle_desc: 'MDM platform for the Apple ecosystem (macOS/iOS/tvOS/visionOS) used by 47,000+ organizations; built MCP solutions in Python integrating OpenAI and Gemini, and a RAG pipeline that reduced manual support handling by ~42%.',
+        exp_mei_role: 'Software Engineer · Nov 2023 – Jun 2025',
+        exp_mei_desc: 'Automation APIs for accounting processes with Node.js, NestJS, Redis, RabbitMQ, and distributed jobs; built OCR with Tesseract for fiscal document processing, reducing manual effort by 80%.',
+        exp_b2ml_role: 'Software Engineer · Jul 2022 – Oct 2023',
+        exp_b2ml_desc: 'Fintech applications for a Brazilian Open Finance startup (USD 10M+ raised); banking integration and reconciliation systems with Banco do Brasil, Nubank, Caixa Econômica, CEMIG, and Copasa.',
+        exp_inatel_role: 'Software Engineering Intern · May 2021 – Jul 2022',
+        exp_inatel_desc: 'Developed internal applications with scalable architecture to optimize academic and administrative processes.',
+        heading_contact: '05 · Contact',
+        contact_text: 'Open to remote backend opportunities. Let&rsquo;s talk.',
+        email_label: 'Email',
+        footer_text: '© 2026 Bruno Almeida Vasconcelos.'
+      }
+    };
+
+    function applyLang(lang) {
+      var dict = I18N[lang] || I18N.pt;
+      document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+
+      var descMeta = document.querySelector('meta[data-i18n-content]');
+      if (descMeta) descMeta.setAttribute('content', dict.meta_description);
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (btn) {
+        var active = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('bg-amber-500', active);
+        btn.classList.toggle('text-neutral-950', active);
+      });
+
+      localStorage.setItem('lang', lang);
+    }
+
+    (function () {
+      var config = window.SITE_CONFIG || {};
+      var githubLink = config.githubLink;
+      var linkedinLink = config.linkedinLink;
+      var email = config.email;
+
+      ['github-link', 'github-link-2'].forEach(function (id) {
+        document.getElementById(id).href = githubLink;
+      });
+      ['linkedin-link', 'linkedin-link-2'].forEach(function (id) {
+        document.getElementById(id).href = linkedinLink;
+      });
+      document.getElementById('email-link').href = 'mailto:' + email;
+
+      // Idioma: preferência salva > idioma do navegador > pt
+      var storedLang = localStorage.getItem('lang');
+      var browserLang = ((navigator.language || navigator.userLanguage || 'pt').toLowerCase().indexOf('pt') === 0) ? 'pt' : 'en';
+      applyLang(storedLang || browserLang);
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyLang(btn.getAttribute('data-lang'));
+        });
+      });
+
+      // Tema
+      var root = document.documentElement;
+      var toggle = document.getElementById('theme-toggle');
+      var sunIcon = document.getElementById('icon-sun');
+      var moonIcon = document.getElementById('icon-moon');
+
+      function reflectIcons() {
+        var isDark = root.classList.contains('dark');
+        sunIcon.classList.toggle('hidden', !isDark);
+        moonIcon.classList.toggle('hidden', isDark);
+      }
+      reflectIcons();
+      renderAllDiagrams(root.classList.contains('dark'));
+
+      toggle.addEventListener('click', function () {
+        var isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        reflectIcons();
+        renderAllDiagrams(isDark);
+      });
+
+      // Menu mobile
+      var menuToggle = document.getElementById('menu-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', function () {
+        mobileMenu.classList.toggle('hidden');
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

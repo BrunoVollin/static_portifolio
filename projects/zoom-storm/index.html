@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="meta_title">Zoom Storm · Bruno Almeida Vasconcelos</title>
+  <meta name="description" data-i18n-content="meta_description" content="Case study: a TypeScript microservices marketplace exploring CQRS, Kafka-driven projections and transactional outbox." />
+  <link rel="canonical" href="https://portifolio.brunoti.com/projects/zoom-storm/" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c1917'/%3E%3Ctext x='16' y='21' font-family='ui-monospace,monospace' font-size='16' font-weight='700' text-anchor='middle' fill='%23f59e0b'%3E%3E_%3C/text%3E%3C/svg%3E" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Bruno Almeida Vasconcelos" />
+  <meta property="og:title" content="Zoom Storm · Case Study" />
+  <meta property="og:description" content="A TypeScript microservices marketplace exploring CQRS, Kafka-driven projections and transactional outbox." />
+  <meta property="og:url" content="https://portifolio.brunoti.com/projects/zoom-storm/" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Zoom Storm · Case Study" />
+  <meta name="twitter:description" content="A TypeScript microservices marketplace exploring CQRS, Kafka-driven projections and transactional outbox." />
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.8/dist/mermaid.min.js"
+    integrity="sha384-N3QqR/7q+xm3BGX+CBbNI8AUmRRqcsDzToy+0z1NLDI0QmTKW8zvwLvqulJgk3dP"
+    crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <script>
+    window.SITE_CONFIG = {
+      githubLink: 'https://github.com/BrunoVollin',
+      linkedinLink: 'https://www.linkedin.com/in/brunovollin/',
+      email: 'contato.bruno.almeida22@gmail.com'
+    };
+  </script>
+</head>
+
+<body class="bg-stone-50 text-stone-900 dark:bg-neutral-950 dark:text-stone-100 antialiased selection:bg-amber-300 selection:text-stone-900">
+
+  <header class="sticky top-0 z-50 border-b border-stone-200 dark:border-neutral-800 bg-stone-50/90 dark:bg-neutral-950/90 backdrop-blur">
+    <div class="mx-auto max-w-3xl px-6 py-4 flex items-center justify-between">
+      <a href="/" class="font-mono text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">
+        bruno<span class="text-amber-600 dark:text-amber-500">@</span>backend
+      </a>
+      <div class="flex items-center gap-3">
+        <div id="lang-toggle" class="flex items-center rounded-md border border-stone-300 dark:border-neutral-700 overflow-hidden text-xs font-mono">
+          <button type="button" data-lang="pt" aria-label="Português" class="px-2 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">PT</button>
+          <button type="button" data-lang="en" aria-label="English" class="px-2 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">EN</button>
+        </div>
+        <button id="theme-toggle" type="button" data-i18n-aria="aria_theme_toggle" aria-label="Toggle light/dark theme"
+          class="grid h-9 w-9 place-items-center rounded-md border border-stone-300 dark:border-neutral-700 hover:border-amber-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
+          <svg id="icon-sun" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5M12 19.5V21M4.22 4.22l1.06 1.06M18.72 18.72l1.06 1.06M3 12h1.5M19.5 12H21M4.22 19.78l1.06-1.06M18.72 5.28l1.06-1.06M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/>
+          </svg>
+          <svg id="icon-moon" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-6 py-12 md:py-16">
+    <a href="/#projetos" data-i18n="back_link" class="inline-flex items-center gap-1 text-sm font-mono text-amber-600 dark:text-amber-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">&larr; Back to portfolio</a>
+
+    <p data-i18n="case_context_note" class="mt-6 text-xs font-mono uppercase tracking-wider text-stone-500 dark:text-stone-400">Personal project · architecture study, not a production system</p>
+    <h1 class="mt-2 text-3xl md:text-5xl font-bold tracking-tight">Zoom Storm</h1>
+    <p data-i18n="case1_desc" class="mt-4 text-lg text-stone-700 dark:text-stone-300 leading-relaxed">A personal marketplace platform built to study and demonstrate distributed-systems patterns in TypeScript.</p>
+
+    <div class="flex flex-wrap items-center gap-4 mt-6">
+      <a href="https://github.com/BrunoVollin/zoom_storm" target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 rounded-md border border-stone-300 dark:border-neutral-700 px-4 py-2 text-sm font-semibold hover:border-amber-500 hover:text-amber-600 dark:hover:text-amber-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
+        <svg class="h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span data-i18n="cta_repo">View repository</span>
+      </a>
+    </div>
+
+    <!-- 1. Contexto e problema -->
+    <section class="mt-14">
+      <h2 data-i18n="s1_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Context &amp; problem</h2>
+      <p data-i18n="s1_body" class="text-stone-700 dark:text-stone-300 leading-relaxed">
+        In a typical CRUD backend, reads and writes hit the same database and the same model. This project asks what changes when the write model and the read model are deliberately different &mdash; different databases, different shapes, kept in sync asynchronously &mdash; and what that costs in complexity, consistency guarantees and operational surface.
+      </p>
+    </section>
+
+    <!-- 2. Objetivos -->
+    <section class="mt-12">
+      <h2 data-i18n="s2_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Objectives</h2>
+      <p data-i18n="s2_body" class="text-stone-700 dark:text-stone-300 leading-relaxed">
+        Practice production-oriented distributed-systems patterns end to end in one codebase: CQRS with two databases, event-driven communication via Kafka, transactional outbox for reliable event publication, centralized authentication via OIDC, and full observability &mdash; instead of studying each pattern in isolation.
+      </p>
+    </section>
+
+    <!-- 3. Arquitetura -->
+    <section class="mt-12">
+      <h2 data-i18n="s3_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Architecture</h2>
+      <p data-i18n="s3_body" class="text-stone-700 dark:text-stone-300 leading-relaxed mb-4">
+        The browser only ever talks to the BFF, never to internal services directly. Domain services own their write model in PostgreSQL and publish domain events through a transactional outbox; dedicated projection workers consume those events from Kafka and materialize the MongoDB read models used by the storefront.
+      </p>
+      <div id="zoom-storm-diagram" class="rounded-lg border border-stone-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 overflow-x-auto max-w-full"></div>
+    </section>
+
+    <!-- 4. Principais componentes -->
+    <section class="mt-12">
+      <h2 data-i18n="s4_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Main components</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">apps/web</p>
+          <p data-i18n="comp_web" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Marketplace storefront built with Next.js (App Router), SSR + React Query.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">apps/bff</p>
+          <p data-i18n="comp_bff" class="text-sm text-stone-600 dark:text-stone-400 mt-1">BFF built with Hono: OIDC authentication via Keycloak, Redis-backed session, injects the Bearer token into gateway calls.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">apps/api-gateway</p>
+          <p data-i18n="comp_gateway" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Internal routing to <code>cart-service</code> and <code>products-service</code>.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">cart-service / products-service</p>
+          <p data-i18n="comp_services" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Domain services (cart and marketplace catalog) built with Hono + Clean Architecture; write to Postgres via Prisma and publish events to Kafka.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">*-projection (workers)</p>
+          <p data-i18n="comp_projection" class="text-sm text-stone-600 dark:text-stone-400 mt-1"><code>cart-projection</code>, <code>products-projection</code>, and <code>cart-products-projection</code> consume Kafka events and materialize the read models in MongoDB.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">OutboxRelay</p>
+          <p data-i18n="comp_outbox" class="text-sm text-stone-600 dark:text-stone-400 mt-1">The <code>OutboxEvent</code> table is written in the same transaction as the aggregate write; a worker publishes to Kafka and marks <code>publishedAt</code>, guaranteeing at-least-once delivery instead of dual-write.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Decisões técnicas -->
+    <section class="mt-12">
+      <h2 data-i18n="s5_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Technical decisions</h2>
+      <ul class="space-y-2 text-stone-700 dark:text-stone-300 text-sm leading-relaxed list-disc list-inside">
+        <li data-i18n="dec_1"><strong>Clean Architecture per service</strong>: domain, application and infrastructure layers separated in each service, with dependency inversion through interfaces/repositories.</li>
+        <li data-i18n="dec_2"><strong>CQRS with separate databases</strong>: writes to PostgreSQL (Prisma), reads from MongoDB, synchronized via Kafka events and projection workers.</li>
+        <li data-i18n="dec_3"><strong>Transactional outbox</strong> instead of direct dual-write: the event is written in the same transaction as the aggregate, then relayed to Kafka.</li>
+        <li data-i18n="dec_4"><strong>Cart-service replicates the product catalog</strong> via <code>cart-products-projection</code> instead of calling <code>products-service</code> synchronously, avoiding coupling and latency between domains at read time.</li>
+        <li data-i18n="dec_5"><strong>BFF pattern</strong>: the browser never talks directly to the gateway; the BFF stores the token in Redis and injects the <code>Authorization</code> header server-side.</li>
+      </ul>
+    </section>
+
+    <!-- 6. Trade-offs -->
+    <section class="mt-12">
+      <h2 data-i18n="s6_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Trade-offs</h2>
+      <ul class="space-y-2 text-stone-700 dark:text-stone-300 text-sm leading-relaxed list-disc list-inside">
+        <li data-i18n="trade_1">Running two databases (PostgreSQL for writes, MongoDB for reads) instead of one adds real operational surface in exchange for read models shaped for the storefront instead of the write schema.</li>
+        <li data-i18n="trade_2">The catalog replica inside <code>cart-service</code> introduces a window between a catalog change and its propagation to the cart &mdash; accepted in exchange for not calling <code>products-service</code> synchronously on every cart read.</li>
+        <li data-i18n="trade_3">At-least-once delivery from the outbox means consumers can see the same event more than once; projections rely mostly on upsert semantics rather than explicit event/aggregate versioning, which is simpler but doesn&rsquo;t fully protect against an old event overwriting newer state.</li>
+      </ul>
+    </section>
+
+    <!-- 7. Resiliência e tratamento de falhas -->
+    <section class="mt-12">
+      <h2 data-i18n="s7_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Resilience &amp; failure handling</h2>
+      <ul class="space-y-2 text-stone-700 dark:text-stone-300 text-sm leading-relaxed list-disc list-inside mb-4">
+        <li data-i18n="res_1"><strong>Read/write consistency window</strong>: PostgreSQL (write) and MongoDB (read) evolve asynchronously via Kafka; projection workers need to be idempotent since Kafka delivers at-least-once and can redeliver the same event.</li>
+        <li data-i18n="res_2"><strong>Projection worker recovery</strong>: if a projection worker goes down, consumption resumes from the last committed Kafka offset; the outbox relay exists precisely to prevent a failure between the PostgreSQL write and the Kafka publish from leaving the system inconsistent.</li>
+        <li data-i18n="res_3"><strong>Per-aggregate ordering</strong>: <code>cart-events</code> and <code>checkout-events</code> for the same cart need to be processed in order by <code>cart-projection</code>, which requires partitioning by aggregate key to preserve per-cart ordering as topics scale.</li>
+        <li data-i18n="res_4"><strong>Coordinated session across BFF, Redis and Keycloak</strong>: expired-token renewal and session invalidation require coordination between the two, to avoid a session that is still valid in Redis but already expired in Keycloak.</li>
+      </ul>
+      <p data-i18n="res_gap" class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed border-l-2 border-amber-500 pl-4">
+        Honestly, not everything is implemented: there is no dead-letter queue and no circuit breaker today. A persistently invalid message can keep failing without a quarantine mechanism, and internal calls between the gateway, BFF and services don&rsquo;t have a consistent timeout/circuit-breaker policy. Kafka events also don&rsquo;t carry a partition key yet, so ordering guarantees would need that before scaling topics to multiple partitions.
+      </p>
+    </section>
+
+    <!-- 8. Resultados e aprendizados -->
+    <section class="mt-12">
+      <h2 data-i18n="s8_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Results &amp; learnings</h2>
+      <p data-i18n="s8_body" class="text-stone-700 dark:text-stone-300 leading-relaxed">
+        This is a personal architecture study, not a production system with real users &mdash; the useful &ldquo;results&rdquo; here are learning outcomes: hands-on experience operating CQRS and outbox at the code level, understanding concretely where eventual consistency actually bites (catalog replication lag), and building observability end to end (OpenTelemetry &rarr; Tempo/Prometheus/Loki, visualized in Grafana) instead of only reading about it. It also made the gaps explicit: no CI, no DLQ, no circuit breaker &mdash; a clear, honest list of what would come next before this could be operated for real.
+      </p>
+    </section>
+
+    <!-- 9. Tecnologias -->
+    <section class="mt-12">
+      <h2 data-i18n="s9_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">TypeScript</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Next.js</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Hono</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Kafka / KafkaJS</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">PostgreSQL + Prisma</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">MongoDB</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Redis</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Keycloak (OIDC/JWT)</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Docker Compose</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">OpenTelemetry</span>
+      </div>
+    </section>
+
+    <!-- 10. Links relacionados -->
+    <section class="mt-12 pb-16">
+      <h2 data-i18n="s10_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Related links</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="https://github.com/BrunoVollin/zoom_storm" target="_blank" rel="noopener" class="text-amber-600 dark:text-amber-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">github.com/BrunoVollin/zoom_storm</a></li>
+        <li><a href="/projects/nfexp/" data-i18n="link_other_case" class="text-amber-600 dark:text-amber-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">NFEXP case study &rarr;</a></li>
+        <li><a href="/#projetos" data-i18n="link_home" class="text-amber-600 dark:text-amber-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">Back to portfolio</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="border-t border-stone-200 dark:border-neutral-800">
+    <div class="mx-auto max-w-3xl px-6 py-8 text-sm text-stone-500 dark:text-stone-500 font-mono">
+      © 2026 Bruno Almeida Vasconcelos.
+    </div>
+  </footer>
+
+  <script>
+    var ZOOM_STORM_DIAGRAM = 'flowchart TB\n' +
+      '    subgraph Browser\n' +
+      '        WEB[apps/web - Next.js]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Edge\n' +
+      '        NEXTAPI["Next.js /api/* route handlers"]\n' +
+      '        BFF[apps/bff - Hono + Redis + Keycloak]\n' +
+      '    end\n' +
+      '\n' +
+      '    GW[apps/api-gateway]\n' +
+      '\n' +
+      '    subgraph Domain\n' +
+      '        CART[apps/cart-service]\n' +
+      '        PROD[apps/products-service]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Write\n' +
+      '        PG[(PostgreSQL zoom)]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Messaging\n' +
+      '        KAFKA{{Kafka}}\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Projections\n' +
+      '        CPROJ[cart-projection]\n' +
+      '        PPROJ[products-projection]\n' +
+      '        CPPROJ[cart-products-projection]\n' +
+      '    end\n' +
+      '\n' +
+      '    subgraph Read\n' +
+      '        MCART[(Mongo zoom-cart)]\n' +
+      '        MPROD[(Mongo zoom-products)]\n' +
+      '    end\n' +
+      '\n' +
+      '    KC[Keycloak]\n' +
+      '    REDIS[(Redis)]\n' +
+      '\n' +
+      '    WEB -->|same-origin cookie| NEXTAPI --> BFF\n' +
+      '    BFF -->|Bearer JWT| GW\n' +
+      '    BFF <--> REDIS\n' +
+      '    BFF <--> KC\n' +
+      '    GW -->|/cart/*| CART\n' +
+      '    GW -->|/products/*| PROD\n' +
+      '\n' +
+      '    CART -->|write + outbox| PG\n' +
+      '    CART -->|read| MCART\n' +
+      '    CART -.produces cart-events / checkout-events.-> KAFKA\n' +
+      '\n' +
+      '    PROD -->|write + outbox| PG\n' +
+      '    PROD -->|read| MPROD\n' +
+      '    PROD -.produces product-events.-> KAFKA\n' +
+      '\n' +
+      '    KAFKA -->|cart-events / checkout-events| CPROJ --> MCART\n' +
+      '    KAFKA -->|product-events| PPROJ --> MPROD\n' +
+      '    KAFKA -->|product-events| CPPROJ --> MCART\n' +
+      '\n' +
+      '    CART -->|enriches items by reading products| MCART\n';
+
+    function renderDiagram(isDark) {
+      var container = document.getElementById('zoom-storm-diagram');
+      if (!container || typeof mermaid === 'undefined') return;
+      container.innerHTML = '<pre class="mermaid">' + ZOOM_STORM_DIAGRAM + '</pre>';
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isDark ? 'dark' : 'base',
+        themeVariables: {
+          primaryColor: isDark ? '#292524' : '#fef3c7',
+          primaryTextColor: isDark ? '#f5f5f4' : '#1c1917',
+          primaryBorderColor: '#d97706',
+          lineColor: isDark ? '#a8a29e' : '#78716c',
+          tertiaryColor: isDark ? '#171717' : '#f5f5f4',
+          fontFamily: 'ui-monospace, monospace',
+          fontSize: '13px'
+        }
+      });
+      mermaid.run({ querySelector: '#zoom-storm-diagram .mermaid' });
+    }
+
+    var I18N = {
+      pt: {
+        meta_title: 'Zoom Storm · Bruno Almeida Vasconcelos',
+        meta_description: 'Case study: um marketplace em microsserviços TypeScript explorando CQRS, projeções via Kafka e transactional outbox.',
+        aria_theme_toggle: 'Alternar tema claro/escuro',
+        back_link: '← Voltar ao portfólio',
+        case_context_note: 'Projeto pessoal · estudo de arquitetura, não sistema em produção',
+        case1_desc: 'Uma plataforma de marketplace pessoal, construída para estudar e demonstrar padrões de sistemas distribuídos em TypeScript.',
+        cta_repo: 'Ver repositório',
+        s1_heading: 'Contexto e problema',
+        s1_body: 'Em um backend CRUD típico, leitura e escrita acontecem no mesmo banco e no mesmo modelo. Este projeto pergunta o que muda quando o modelo de escrita e o modelo de leitura são deliberadamente diferentes — bancos diferentes, formatos diferentes, sincronizados de forma assíncrona — e quanto isso custa em complexidade, garantias de consistência e superfície operacional.',
+        s2_heading: 'Objetivos',
+        s2_body: 'Praticar, de ponta a ponta em um único código-fonte, padrões de sistemas distribuídos orientados a produção: CQRS com dois bancos, comunicação orientada a eventos via Kafka, transactional outbox para publicação confiável de eventos, autenticação centralizada via OIDC e observabilidade completa — em vez de estudar cada padrão isoladamente.',
+        s3_heading: 'Arquitetura',
+        s3_body: 'O navegador só fala com o BFF, nunca diretamente com os serviços internos. Os serviços de domínio possuem seu modelo de escrita em PostgreSQL e publicam eventos de domínio através de um transactional outbox; workers de projeção dedicados consomem esses eventos do Kafka e materializam os read models em MongoDB usados pela loja.',
+        s4_heading: 'Principais componentes',
+        comp_web: 'Storefront do marketplace em Next.js (App Router), SSR + React Query.',
+        comp_bff: 'BFF em Hono: autenticação OIDC via Keycloak, sessão em Redis, injeta o Bearer token nas chamadas ao gateway.',
+        comp_gateway: 'Roteamento interno para <code>cart-service</code> e <code>products-service</code>.',
+        comp_services: 'Serviços de domínio (carrinho e catálogo do marketplace) em Hono + Clean Architecture; escrevem em Postgres via Prisma e publicam eventos no Kafka.',
+        comp_projection: '<code>cart-projection</code>, <code>products-projection</code> e <code>cart-products-projection</code> consomem eventos do Kafka e materializam os read models em MongoDB.',
+        comp_outbox: 'A tabela <code>OutboxEvent</code> é gravada na mesma transação da escrita do agregado; um worker publica no Kafka e marca <code>publishedAt</code>, garantindo entrega at-least-once em vez de dual-write.',
+        s5_heading: 'Decisões técnicas',
+        dec_1: '<strong>Clean Architecture por serviço</strong>: camadas de domínio, aplicação e infraestrutura separadas em cada serviço, com inversão de dependência via interfaces/repositories.',
+        dec_2: '<strong>CQRS com bancos separados</strong>: escrita em PostgreSQL (Prisma), leitura em MongoDB, sincronizados por eventos Kafka e workers de projeção.',
+        dec_3: '<strong>Transactional outbox</strong> em vez de dual-write direto: o evento é gravado na mesma transação do agregado e depois repassado ao Kafka.',
+        dec_4: '<strong>Cart-service replica o catálogo de produtos</strong> via <code>cart-products-projection</code> em vez de chamar <code>products-service</code> de forma síncrona, evitando acoplamento e latência entre domínios no momento da leitura.',
+        dec_5: '<strong>Padrão BFF</strong>: o navegador nunca fala diretamente com o gateway; o BFF guarda o token em Redis e injeta o header <code>Authorization</code> no servidor.',
+        s6_heading: 'Trade-offs',
+        trade_1: 'Manter dois bancos (PostgreSQL para escrita, MongoDB para leitura) em vez de um adiciona superfície operacional real, em troca de read models moldados para a loja, e não para o schema de escrita.',
+        trade_2: 'A réplica do catálogo dentro do <code>cart-service</code> introduz uma janela entre uma mudança no catálogo e sua propagação para o carrinho — aceita em troca de não chamar <code>products-service</code> de forma síncrona a cada leitura do carrinho.',
+        trade_3: 'Entrega at-least-once do outbox significa que consumidores podem ver o mesmo evento mais de uma vez; as projeções dependem majoritariamente de upsert em vez de versionamento explícito de evento/agregado, o que é mais simples mas não protege totalmente contra um evento antigo sobrescrever um estado mais novo.',
+        s7_heading: 'Resiliência e tratamento de falhas',
+        res_1: '<strong>Janela de consistência entre leitura e escrita</strong>: PostgreSQL (escrita) e MongoDB (leitura) evoluem de forma assíncrona via Kafka; os workers de projeção precisam ser idempotentes, já que o Kafka entrega em modelo at-least-once e pode reentregar o mesmo evento.',
+        res_2: '<strong>Recuperação dos workers de projeção</strong>: se um worker cai, o consumo retoma do último offset commitado no Kafka; o outbox relay existe justamente para evitar que uma falha entre a escrita no Postgres e a publicação no Kafka deixe o sistema inconsistente.',
+        res_3: '<strong>Ordenação por agregado</strong>: <code>cart-events</code> e <code>checkout-events</code> do mesmo carrinho precisam ser processados em ordem pelo <code>cart-projection</code>, o que exige particionamento por chave de agregação para preservar a ordem por carrinho à medida que os tópicos escalam.',
+        res_4: '<strong>Sessão coordenada entre BFF, Redis e Keycloak</strong>: renovação de token expirado e invalidação de sessão exigem coordenação entre os dois, para não deixar uma sessão válida no Redis com token já expirado no Keycloak.',
+        res_gap: 'Sendo honesto: nem tudo está implementado hoje. Não há dead-letter queue nem circuit breaker. Uma mensagem persistentemente inválida pode continuar falhando sem um mecanismo de quarentena, e as chamadas internas entre gateway, BFF e serviços não têm uma política consistente de timeout/circuit breaker. Os eventos do Kafka também ainda não carregam uma chave de partição, então a garantia de ordenação precisaria disso antes de escalar os tópicos para múltiplas partições.',
+        s8_heading: 'Resultados e aprendizados',
+        s8_body: 'Este é um estudo pessoal de arquitetura, não um sistema em produção com usuários reais — os "resultados" úteis aqui são de aprendizado: experiência prática operando CQRS e outbox no nível do código, entender concretamente onde a consistência eventual realmente incomoda (defasagem na replicação do catálogo) e construir observabilidade de ponta a ponta (OpenTelemetry → Tempo/Prometheus/Loki, visualizado no Grafana) em vez de só ler sobre isso. Também deixou as lacunas explícitas: sem CI, sem DLQ, sem circuit breaker — uma lista honesta do que viria a seguir antes de operar isso de verdade.',
+        s9_heading: 'Tecnologias',
+        s10_heading: 'Links relacionados',
+        link_other_case: 'Case study do NFEXP →',
+        link_home: 'Voltar ao portfólio'
+      },
+      en: {
+        meta_title: 'Zoom Storm · Bruno Almeida Vasconcelos',
+        meta_description: 'Case study: a TypeScript microservices marketplace exploring CQRS, Kafka-driven projections and transactional outbox.',
+        aria_theme_toggle: 'Toggle light/dark theme',
+        back_link: '← Back to portfolio',
+        case_context_note: 'Personal project · architecture study, not a production system',
+        case1_desc: 'A personal marketplace platform built to study and demonstrate distributed-systems patterns in TypeScript.',
+        cta_repo: 'View repository',
+        s1_heading: 'Context &amp; problem',
+        s1_body: 'In a typical CRUD backend, reads and writes hit the same database and the same model. This project asks what changes when the write model and the read model are deliberately different — different databases, different shapes, kept in sync asynchronously — and what that costs in complexity, consistency guarantees and operational surface.',
+        s2_heading: 'Objectives',
+        s2_body: 'Practice production-oriented distributed-systems patterns end to end in one codebase: CQRS with two databases, event-driven communication via Kafka, transactional outbox for reliable event publication, centralized authentication via OIDC, and full observability — instead of studying each pattern in isolation.',
+        s3_heading: 'Architecture',
+        s3_body: 'The browser only ever talks to the BFF, never to internal services directly. Domain services own their write model in PostgreSQL and publish domain events through a transactional outbox; dedicated projection workers consume those events from Kafka and materialize the MongoDB read models used by the storefront.',
+        s4_heading: 'Main components',
+        comp_web: 'Marketplace storefront built with Next.js (App Router), SSR + React Query.',
+        comp_bff: 'BFF built with Hono: OIDC authentication via Keycloak, Redis-backed session, injects the Bearer token into gateway calls.',
+        comp_gateway: 'Internal routing to <code>cart-service</code> and <code>products-service</code>.',
+        comp_services: 'Domain services (cart and marketplace catalog) built with Hono + Clean Architecture; write to Postgres via Prisma and publish events to Kafka.',
+        comp_projection: '<code>cart-projection</code>, <code>products-projection</code>, and <code>cart-products-projection</code> consume Kafka events and materialize the read models in MongoDB.',
+        comp_outbox: 'The <code>OutboxEvent</code> table is written in the same transaction as the aggregate write; a worker publishes to Kafka and marks <code>publishedAt</code>, guaranteeing at-least-once delivery instead of dual-write.',
+        s5_heading: 'Technical decisions',
+        dec_1: '<strong>Clean Architecture per service</strong>: domain, application and infrastructure layers separated in each service, with dependency inversion through interfaces/repositories.',
+        dec_2: '<strong>CQRS with separate databases</strong>: writes to PostgreSQL (Prisma), reads from MongoDB, synchronized via Kafka events and projection workers.',
+        dec_3: '<strong>Transactional outbox</strong> instead of direct dual-write: the event is written in the same transaction as the aggregate, then relayed to Kafka.',
+        dec_4: '<strong>Cart-service replicates the product catalog</strong> via <code>cart-products-projection</code> instead of calling <code>products-service</code> synchronously, avoiding coupling and latency between domains at read time.',
+        dec_5: '<strong>BFF pattern</strong>: the browser never talks directly to the gateway; the BFF stores the token in Redis and injects the <code>Authorization</code> header server-side.',
+        s6_heading: 'Trade-offs',
+        trade_1: 'Running two databases (PostgreSQL for writes, MongoDB for reads) instead of one adds real operational surface in exchange for read models shaped for the storefront instead of the write schema.',
+        trade_2: 'The catalog replica inside <code>cart-service</code> introduces a window between a catalog change and its propagation to the cart — accepted in exchange for not calling <code>products-service</code> synchronously on every cart read.',
+        trade_3: 'At-least-once delivery from the outbox means consumers can see the same event more than once; projections rely mostly on upsert semantics rather than explicit event/aggregate versioning, which is simpler but doesn&rsquo;t fully protect against an old event overwriting newer state.',
+        s7_heading: 'Resilience &amp; failure handling',
+        res_1: '<strong>Read/write consistency window</strong>: PostgreSQL (write) and MongoDB (read) evolve asynchronously via Kafka; projection workers need to be idempotent since Kafka delivers at-least-once and can redeliver the same event.',
+        res_2: '<strong>Projection worker recovery</strong>: if a projection worker goes down, consumption resumes from the last committed Kafka offset; the outbox relay exists precisely to prevent a failure between the PostgreSQL write and the Kafka publish from leaving the system inconsistent.',
+        res_3: '<strong>Per-aggregate ordering</strong>: <code>cart-events</code> and <code>checkout-events</code> for the same cart need to be processed in order by <code>cart-projection</code>, which requires partitioning by aggregate key to preserve per-cart ordering as topics scale.',
+        res_4: '<strong>Coordinated session across BFF, Redis and Keycloak</strong>: expired-token renewal and session invalidation require coordination between the two, to avoid a session that is still valid in Redis but already expired in Keycloak.',
+        res_gap: 'Honestly, not everything is implemented: there is no dead-letter queue and no circuit breaker today. A persistently invalid message can keep failing without a quarantine mechanism, and internal calls between the gateway, BFF and services don&rsquo;t have a consistent timeout/circuit-breaker policy. Kafka events also don&rsquo;t carry a partition key yet, so ordering guarantees would need that before scaling topics to multiple partitions.',
+        s8_heading: 'Results &amp; learnings',
+        s8_body: 'This is a personal architecture study, not a production system with real users — the useful &ldquo;results&rdquo; here are learning outcomes: hands-on experience operating CQRS and outbox at the code level, understanding concretely where eventual consistency actually bites (catalog replication lag), and building observability end to end (OpenTelemetry → Tempo/Prometheus/Loki, visualized in Grafana) instead of only reading about it. It also made the gaps explicit: no CI, no DLQ, no circuit breaker — a clear, honest list of what would come next before this could be operated for real.',
+        s9_heading: 'Technologies',
+        s10_heading: 'Related links',
+        link_other_case: 'NFEXP case study →',
+        link_home: 'Back to portfolio'
+      }
+    };
+
+    function applyLang(lang) {
+      var dict = I18N[lang] || I18N.en;
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-aria');
+        if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+      });
+      var descMeta = document.querySelector('meta[data-i18n-content]');
+      if (descMeta) descMeta.setAttribute('content', dict.meta_description);
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (btn) {
+        var active = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('bg-amber-500', active);
+        btn.classList.toggle('text-neutral-950', active);
+      });
+
+      localStorage.setItem('lang', lang);
+    }
+
+    (function () {
+      var storedLang = localStorage.getItem('lang');
+      applyLang(storedLang === 'pt' ? 'pt' : 'en');
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyLang(btn.getAttribute('data-lang'));
+        });
+      });
+
+      var root = document.documentElement;
+      var toggle = document.getElementById('theme-toggle');
+      var sunIcon = document.getElementById('icon-sun');
+      var moonIcon = document.getElementById('icon-moon');
+
+      function reflectIcons() {
+        var isDark = root.classList.contains('dark');
+        sunIcon.classList.toggle('hidden', !isDark);
+        moonIcon.classList.toggle('hidden', isDark);
+      }
+      reflectIcons();
+      renderDiagram(root.classList.contains('dark'));
+
+      toggle.addEventListener('click', function () {
+        var isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        reflectIcons();
+        renderDiagram(isDark);
+      });
+    })();
+  </script>
+</body>
+</html>

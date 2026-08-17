@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="meta_title">NFEXP · Bruno Almeida Vasconcelos</title>
+  <meta name="description" data-i18n-content="meta_description" content="Case study: a fiscal-document automation platform for Brazilian micro-entrepreneurs, with NF-e emission integrated with SEFAZ." />
+  <link rel="canonical" href="https://portifolio.brunoti.com/projects/nfexp/" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c1917'/%3E%3Ctext x='16' y='21' font-family='ui-monospace,monospace' font-size='16' font-weight='700' text-anchor='middle' fill='%23f59e0b'%3E%3E_%3C/text%3E%3C/svg%3E" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Bruno Almeida Vasconcelos" />
+  <meta property="og:title" content="NFEXP · Case Study" />
+  <meta property="og:description" content="A fiscal-document automation platform for Brazilian micro-entrepreneurs, with NF-e emission integrated with SEFAZ." />
+  <meta property="og:url" content="https://portifolio.brunoti.com/projects/nfexp/" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="NFEXP · Case Study" />
+  <meta name="twitter:description" content="A fiscal-document automation platform for Brazilian micro-entrepreneurs, with NF-e emission integrated with SEFAZ." />
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.8/dist/mermaid.min.js"
+    integrity="sha384-N3QqR/7q+xm3BGX+CBbNI8AUmRRqcsDzToy+0z1NLDI0QmTKW8zvwLvqulJgk3dP"
+    crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <script>
+    window.SITE_CONFIG = {
+      githubLink: 'https://github.com/BrunoVollin',
+      linkedinLink: 'https://www.linkedin.com/in/brunovollin/',
+      email: 'contato.bruno.almeida22@gmail.com'
+    };
+  </script>
+</head>
+
+<body class="bg-stone-50 text-stone-900 dark:bg-neutral-950 dark:text-stone-100 antialiased selection:bg-amber-300 selection:text-stone-900">
+
+  <header class="sticky top-0 z-50 border-b border-stone-200 dark:border-neutral-800 bg-stone-50/90 dark:bg-neutral-950/90 backdrop-blur">
+    <div class="mx-auto max-w-3xl px-6 py-4 flex items-center justify-between">
+      <a href="/" class="font-mono text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">
+        bruno<span class="text-amber-600 dark:text-amber-500">@</span>backend
+      </a>
+      <div class="flex items-center gap-3">
+        <div id="lang-toggle" class="flex items-center rounded-md border border-stone-300 dark:border-neutral-700 overflow-hidden text-xs font-mono">
+          <button type="button" data-lang="pt" aria-label="Português" class="px-2 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">PT</button>
+          <button type="button" data-lang="en" aria-label="English" class="px-2 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">EN</button>
+        </div>
+        <button id="theme-toggle" type="button" data-i18n-aria="aria_theme_toggle" aria-label="Toggle light/dark theme"
+          class="grid h-9 w-9 place-items-center rounded-md border border-stone-300 dark:border-neutral-700 hover:border-amber-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
+          <svg id="icon-sun" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5M12 19.5V21M4.22 4.22l1.06 1.06M18.72 18.72l1.06 1.06M3 12h1.5M19.5 12H21M4.22 19.78l1.06-1.06M18.72 5.28l1.06-1.06M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"/>
+          </svg>
+          <svg id="icon-moon" class="hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-6 py-12 md:py-16">
+    <a href="/#projetos" data-i18n="back_link" class="inline-flex items-center gap-1 text-sm font-mono text-amber-600 dark:text-amber-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">&larr; Back to portfolio</a>
+
+    <p data-i18n="case_context_note" class="mt-6 text-xs font-mono uppercase tracking-wider text-stone-500 dark:text-stone-400">Built with a small team of collaborators &middot; not a large-scale commercial product</p>
+    <h1 class="mt-2 text-3xl md:text-5xl font-bold tracking-tight">NFEXP</h1>
+    <p data-i18n="case2_desc" class="mt-4 text-lg text-stone-700 dark:text-stone-300 leading-relaxed">A fiscal-document automation platform for Brazilian micro-entrepreneurs (MEIs), built with a small team.</p>
+
+    <p data-i18n="repo_note" class="mt-6 text-sm text-stone-500 dark:text-stone-400 border-l-2 border-stone-300 dark:border-neutral-700 pl-4">
+      The repository is private and co-authored with two collaborators, so it isn&rsquo;t linked here &mdash; this page describes the work directly.
+    </p>
+
+    <!-- 1. Contexto e problema -->
+    <section class="mt-14">
+      <h2 data-i18n="s1_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Context &amp; problem</h2>
+      <p data-i18n="s1_body" class="text-stone-700 dark:text-stone-300 leading-relaxed">
+        Brazilian micro-entrepreneurs (MEIs) who need to issue NF-e fiscal documents typically depend on manual government portals or paid third-party services for every invoice, certificate renewal, and status check. NFEXP automates that flow around a single backend instead of a spreadsheet and a manual portal.
+      </p>
+    </section>
+
+    <!-- 2. Objetivos -->
+    <section class="mt-12">
+      <h2 data-i18n="s2_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Objectives</h2>
+      <p data-i18n="s2_body" class="text-stone-700 dark:text-stone-300 leading-relaxed">
+        Build a backend that owns the full NF-e lifecycle &mdash; digital-certificate handling, XML generation and signing, SEFAZ communication, status queries, cancellations, corrections and DANFE (PDF) generation &mdash; plus the back-office tooling (stock, clients, billing) around it.
+      </p>
+    </section>
+
+    <!-- 3. Arquitetura -->
+    <section class="mt-12">
+      <h2 data-i18n="s3_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Architecture</h2>
+      <p data-i18n="s3_body" class="text-stone-700 dark:text-stone-300 leading-relaxed mb-4">
+        A NestJS modular monolith, not a microservices system: one deployable API organized into feature modules (NF-e, stock, back-office, auth, payment), backed by PostgreSQL for transactional data and MongoDB for operational logs, talking to SEFAZ&rsquo;s SOAP/XML web services for document authorization.
+      </p>
+      <div id="nfexp-diagram" class="rounded-lg border border-stone-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 overflow-x-auto max-w-full"></div>
+    </section>
+
+    <!-- 4. Principais componentes -->
+    <section class="mt-12">
+      <h2 data-i18n="s4_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Main components</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">nfe</p>
+          <p data-i18n="comp_nfe" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Application/domain/infrastructure split for the NF-e lifecycle, with dedicated sub-modules for certificates (<code>cert</code>), products (<code>prod</code>), series (<code>serie</code>), import and PDF (DANFE) generation.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">crypto</p>
+          <p data-i18n="comp_crypto" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Digital-certificate parsing and signing (built on <code>node-forge</code>), kept apart from business modules.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">stock</p>
+          <p data-i18n="comp_stock" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Products, entries, exits, suppliers and storage &mdash; inventory tracking tied to invoiced items.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">backoffice / cliente / dashboard</p>
+          <p data-i18n="comp_backoffice" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Client management and operational reporting for the business owner using the platform.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">auth</p>
+          <p data-i18n="comp_auth" class="text-sm text-stone-600 dark:text-stone-400 mt-1">JWT-based authentication guarding the API.</p>
+        </div>
+        <div class="rounded-lg border border-stone-200 dark:border-neutral-800 p-4">
+          <p class="font-mono text-sm font-semibold text-amber-700 dark:text-amber-500">payment</p>
+          <p data-i18n="comp_payment" class="text-sm text-stone-600 dark:text-stone-400 mt-1">Records a signature/subscription payment entry tied to the user; there is no live payment-gateway integration in the code as it stands today.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Decisões técnicas -->
+    <section class="mt-12">
+      <h2 data-i18n="s5_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Technical decisions</h2>
+      <ul class="space-y-2 text-stone-700 dark:text-stone-300 text-sm leading-relaxed list-disc list-inside">
+        <li data-i18n="dec_1"><strong>Modular monolith over microservices</strong>: one deployable NestJS app organized into feature modules, matched to the team size and operational budget of the project rather than a distributed-systems approach.</li>
+        <li data-i18n="dec_2"><strong>NF-e emission delegated to a dedicated library</strong> (<code>node-nfe-nfce</code>) wrapping SEFAZ&rsquo;s SOAP/XML contracts, instead of hand-rolling XML signing and web-service calls.</li>
+        <li data-i18n="dec_3"><strong>Certificate handling isolated in its own module</strong>, so certificate parsing/signing logic doesn&rsquo;t leak into business modules.</li>
+        <li data-i18n="dec_4"><strong>Split storage by access pattern</strong>: PostgreSQL (Prisma) for transactional business data, MongoDB (Mongoose) for logs &mdash; different write/read patterns use different stores instead of forcing everything into one schema.</li>
+        <li data-i18n="dec_5"><strong>Server-side PDF/DANFE generation</strong> happens after SEFAZ authorization, so the stored document reflects what was actually authorized.</li>
+      </ul>
+    </section>
+
+    <!-- 6. Trade-offs -->
+    <section class="mt-12">
+      <h2 data-i18n="s6_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Trade-offs</h2>
+      <ul class="space-y-2 text-stone-700 dark:text-stone-300 text-sm leading-relaxed list-disc list-inside">
+        <li data-i18n="trade_1">A modular monolith means NF-e, stock and back-office scale and deploy together; simpler to operate at this size, but there&rsquo;s no independent scaling if NF-e emission under SEFAZ load becomes the bottleneck.</li>
+        <li data-i18n="trade_2">Relying on a third-party NF-e library trades control over the SOAP/XML layer for faster delivery &mdash; bugs or SEFAZ schema changes are bounded by that dependency&rsquo;s release cycle.</li>
+        <li data-i18n="trade_3">Running MongoDB only for logs alongside a primary PostgreSQL database adds a second datastore to operate for a relatively narrow use case.</li>
+        <li data-i18n="trade_4">The payment module currently only records a fixed-cost signature entry &mdash; there is no live payment-gateway integration in the code today, so anything beyond record-keeping is out of scope as it stands.</li>
+      </ul>
+    </section>
+
+    <!-- 7. Resiliência e tratamento de falhas -->
+    <section class="mt-12">
+      <h2 data-i18n="s7_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Resilience &amp; failure handling</h2>
+      <p data-i18n="s7_body" class="text-stone-700 dark:text-stone-300 leading-relaxed">
+        Fault-handling here is mostly what SEFAZ&rsquo;s own contract and the <code>node-nfe-nfce</code> library provide, rather than a custom retry/backoff/circuit-breaker layer on top: synchronous request/response against the SOAP service, status queries for polling authorization results, and correction (CC-e) events for fixing details after issuance. Digital-certificate expiry and SEFAZ&rsquo;s contingency ("ambiente") modes are the realistic failure sources for this kind of integration, and are handled through certificate and environment configuration rather than automated resilience patterns.
+      </p>
+    </section>
+
+    <!-- 8. Resultados e aprendizados -->
+    <section class="mt-12">
+      <h2 data-i18n="s8_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Results &amp; learnings</h2>
+      <p data-i18n="s8_body" class="text-stone-700 dark:text-stone-300 leading-relaxed">
+        Built with a small team &mdash; most of the commit history is mine, with two collaborators &mdash; as a working system for MEI fiscal automation, not a project proven at large commercial scale. It's a real integration with a constraint most side projects never touch: digital-certificate signing and a government web-service contract with real consequences for getting it wrong. The main learning was how much of "integration work" in this domain is actually about handling the certificate and SEFAZ&rsquo;s contingency/environment configuration correctly, not just calling an API &mdash; plus the full NF-e document lifecycle (emission, cancellation, correction via CC-e).
+      </p>
+    </section>
+
+    <!-- 9. Tecnologias -->
+    <section class="mt-12">
+      <h2 data-i18n="s9_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Technologies</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">NestJS</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">TypeScript</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">Prisma + PostgreSQL</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">MongoDB (Mongoose)</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">node-nfe-nfce</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">node-forge (digital certificates)</span>
+        <span class="rounded-full bg-stone-900 dark:bg-neutral-800 text-stone-50 text-xs font-mono px-3 py-1">JWT</span>
+      </div>
+    </section>
+
+    <!-- 10. Links relacionados -->
+    <section class="mt-12 pb-16">
+      <h2 data-i18n="s10_heading" class="text-sm font-mono uppercase tracking-wider text-amber-600 dark:text-amber-500 mb-3">Related links</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/projects/zoom-storm/" data-i18n="link_other_case" class="text-amber-600 dark:text-amber-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">Zoom Storm case study &rarr;</a></li>
+        <li><a href="/#projetos" data-i18n="link_home" class="text-amber-600 dark:text-amber-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">Back to portfolio</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="border-t border-stone-200 dark:border-neutral-800">
+    <div class="mx-auto max-w-3xl px-6 py-8 text-sm text-stone-500 dark:text-stone-500 font-mono">
+      © 2026 Bruno Almeida Vasconcelos.
+    </div>
+  </footer>
+
+  <script>
+    var NFEXP_DIAGRAM = 'flowchart LR\n' +
+      '    CLIENT[HTTP Client] --> API\n' +
+      '\n' +
+      '    subgraph API[NestJS API - modular monolith]\n' +
+      '        AUTH[auth - JWT]\n' +
+      '        NFE["nfe: domain / application / infra + cert + pdf"]\n' +
+      '        STOCK[stock]\n' +
+      '        BACKOFFICE[backoffice / cliente / dashboard]\n' +
+      '        PAYMENT[payment]\n' +
+      '    end\n' +
+      '\n' +
+      '    API -->|Prisma| PG[(PostgreSQL)]\n' +
+      '    API -->|Mongoose| MONGO[(MongoDB - logs)]\n' +
+      '    NFE -->|SOAP / XML via node-nfe-nfce| SEFAZ[[SEFAZ web services]]\n' +
+      '    NFE --> PDF[DANFE PDF generation]\n';
+
+    function renderDiagram(isDark) {
+      var container = document.getElementById('nfexp-diagram');
+      if (!container || typeof mermaid === 'undefined') return;
+      container.innerHTML = '<pre class="mermaid">' + NFEXP_DIAGRAM + '</pre>';
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isDark ? 'dark' : 'base',
+        themeVariables: {
+          primaryColor: isDark ? '#292524' : '#fef3c7',
+          primaryTextColor: isDark ? '#f5f5f4' : '#1c1917',
+          primaryBorderColor: '#d97706',
+          lineColor: isDark ? '#a8a29e' : '#78716c',
+          tertiaryColor: isDark ? '#171717' : '#f5f5f4',
+          fontFamily: 'ui-monospace, monospace',
+          fontSize: '13px'
+        }
+      });
+      mermaid.run({ querySelector: '#nfexp-diagram .mermaid' });
+    }
+
+    var I18N = {
+      pt: {
+        meta_title: 'NFEXP · Bruno Almeida Vasconcelos',
+        meta_description: 'Case study: uma plataforma de automação de documentos fiscais para MEIs, com emissão de NF-e integrada à SEFAZ.',
+        aria_theme_toggle: 'Alternar tema claro/escuro',
+        back_link: '← Voltar ao portfólio',
+        case_context_note: 'Construído com um pequeno time de colaboradores · não é um produto comercial em larga escala',
+        case2_desc: 'Uma plataforma de automação de documentos fiscais para microempreendedores individuais (MEIs), construída com um pequeno time.',
+        repo_note: 'O repositório é privado e co-autorado com dois colaboradores, por isso não está linkado aqui — esta página descreve o trabalho diretamente.',
+        s1_heading: 'Contexto e problema',
+        s1_body: 'Microempreendedores individuais (MEIs) que precisam emitir NF-e normalmente dependem de portais manuais do governo ou de serviços terceirizados pagos para cada nota, renovação de certificado e consulta de status. O NFEXP automatiza esse fluxo em torno de um único backend, em vez de uma planilha e um portal manual.',
+        s2_heading: 'Objetivos',
+        s2_body: 'Construir um backend que assuma todo o ciclo de vida da NF-e — tratamento de certificado digital, geração e assinatura de XML, comunicação com a SEFAZ, consulta de status, cancelamentos, correções e geração da DANFE (PDF) — além das ferramentas de back-office (estoque, clientes, cobrança) ao redor disso.',
+        s3_heading: 'Arquitetura',
+        s3_body: 'Um monólito modular em NestJS, não um sistema de microsserviços: uma única API implantável organizada em módulos por domínio (NF-e, estoque, back-office, autenticação, pagamento), com PostgreSQL para dados transacionais e MongoDB para logs operacionais, comunicando-se com os web services SOAP/XML da SEFAZ para autorização de documentos.',
+        s4_heading: 'Principais componentes',
+        comp_nfe: 'Divisão em domain/application/infra para o ciclo de vida da NF-e, com submódulos dedicados para certificados (<code>cert</code>), produtos (<code>prod</code>), séries (<code>serie</code>), importação e geração de PDF (DANFE).',
+        comp_crypto: 'Parsing e assinatura de certificado digital (construído sobre <code>node-forge</code>), mantido separado dos módulos de negócio.',
+        comp_stock: 'Produtos, entradas, saídas, fornecedores e armazenamento — controle de estoque vinculado aos itens faturados.',
+        comp_backoffice: 'Gestão de clientes e relatórios operacionais para o dono do negócio que usa a plataforma.',
+        comp_auth: 'Autenticação baseada em JWT protegendo a API.',
+        comp_payment: 'Registra uma entrada de pagamento de assinatura vinculada ao usuário; não há integração com gateway de pagamento ativa no código hoje.',
+        s5_heading: 'Decisões técnicas',
+        dec_1: '<strong>Monólito modular em vez de microsserviços</strong>: uma única aplicação NestJS implantável organizada em módulos por domínio, alinhada ao tamanho do time e ao orçamento operacional do projeto, em vez de uma abordagem distribuída.',
+        dec_2: '<strong>Emissão de NF-e delegada a uma biblioteca dedicada</strong> (<code>node-nfe-nfce</code>) que encapsula os contratos SOAP/XML da SEFAZ, em vez de implementar manualmente a assinatura de XML e as chamadas ao web service.',
+        dec_3: '<strong>Tratamento de certificado isolado em módulo próprio</strong>, para que a lógica de parsing/assinatura do certificado não vaze para os módulos de negócio.',
+        dec_4: '<strong>Armazenamento dividido por padrão de acesso</strong>: PostgreSQL (Prisma) para dados transacionais de negócio, MongoDB (Mongoose) para logs — padrões diferentes de leitura/escrita usam bancos diferentes em vez de forçar tudo em um único schema.',
+        dec_5: '<strong>Geração de PDF/DANFE no servidor</strong> ocorre depois da autorização da SEFAZ, garantindo que o documento armazenado reflita o que foi realmente autorizado.',
+        s6_heading: 'Trade-offs',
+        trade_1: 'Um monólito modular significa que NF-e, estoque e back-office escalam e são implantados juntos; mais simples de operar nesse porte, mas sem escalonamento independente se a emissão de NF-e sob carga da SEFAZ virar o gargalo.',
+        trade_2: 'Depender de uma biblioteca de NF-e de terceiros troca controle sobre a camada SOAP/XML por entrega mais rápida — bugs ou mudanças no schema da SEFAZ ficam limitados ao ciclo de release dessa dependência.',
+        trade_3: 'Rodar MongoDB apenas para logs ao lado de um banco PostgreSQL principal adiciona um segundo datastore para operar em um caso de uso relativamente estreito.',
+        trade_4: 'O módulo de pagamento hoje só registra uma entrada de assinatura de custo fixo — não há integração com gateway de pagamento ativa no código, então qualquer coisa além do registro está fora do escopo como está hoje.',
+        s7_heading: 'Resiliência e tratamento de falhas',
+        s7_body: 'O tratamento de falhas aqui é majoritariamente o que o próprio contrato da SEFAZ e a biblioteca <code>node-nfe-nfce</code> oferecem, e não uma camada própria de retry/backoff/circuit breaker: requisição/resposta síncrona contra o serviço SOAP, consulta de status para checar o resultado da autorização, e eventos de correção (CC-e) para ajustar detalhes após a emissão. Expiração de certificado digital e os modos de contingência ("ambiente") da SEFAZ são as fontes reais de falha nesse tipo de integração, e são tratados via configuração de certificado/ambiente, não por padrões automatizados de resiliência.',
+        s8_heading: 'Resultados e aprendizados',
+        s8_body: 'Construído com um pequeno time — a maior parte do histórico de commits é minha, com dois colaboradores — como um sistema funcional de automação fiscal para MEIs, não um projeto comprovado em larga escala comercial. É uma integração real com uma restrição que a maioria dos projetos pessoais nunca encosta: assinatura de certificado digital e um contrato de web service governamental com consequências reais em caso de erro. O principal aprendizado foi entender o quanto "trabalho de integração" nesse domínio é, na prática, sobre lidar corretamente com o certificado e a configuração de contingência/ambiente da SEFAZ, não apenas chamar uma API — além do ciclo de vida completo da NF-e (emissão, cancelamento, correção via CC-e).',
+        s9_heading: 'Tecnologias',
+        s10_heading: 'Links relacionados',
+        link_other_case: 'Case study do Zoom Storm →',
+        link_home: 'Voltar ao portfólio'
+      },
+      en: {
+        meta_title: 'NFEXP · Bruno Almeida Vasconcelos',
+        meta_description: 'Case study: a fiscal-document automation platform for Brazilian micro-entrepreneurs, with NF-e emission integrated with SEFAZ.',
+        aria_theme_toggle: 'Toggle light/dark theme',
+        back_link: '← Back to portfolio',
+        case_context_note: 'Built with a small team of collaborators · not a large-scale commercial product',
+        case2_desc: 'A fiscal-document automation platform for Brazilian micro-entrepreneurs (MEIs), built with a small team.',
+        repo_note: 'The repository is private and co-authored with two collaborators, so it isn&rsquo;t linked here — this page describes the work directly.',
+        s1_heading: 'Context &amp; problem',
+        s1_body: 'Brazilian micro-entrepreneurs (MEIs) who need to issue NF-e fiscal documents typically depend on manual government portals or paid third-party services for every invoice, certificate renewal, and status check. NFEXP automates that flow around a single backend instead of a spreadsheet and a manual portal.',
+        s2_heading: 'Objectives',
+        s2_body: 'Build a backend that owns the full NF-e lifecycle — digital-certificate handling, XML generation and signing, SEFAZ communication, status queries, cancellations, corrections and DANFE (PDF) generation — plus the back-office tooling (stock, clients, billing) around it.',
+        s3_heading: 'Architecture',
+        s3_body: 'A NestJS modular monolith, not a microservices system: one deployable API organized into feature modules (NF-e, stock, back-office, auth, payment), backed by PostgreSQL for transactional data and MongoDB for operational logs, talking to SEFAZ&rsquo;s SOAP/XML web services for document authorization.',
+        s4_heading: 'Main components',
+        comp_nfe: 'Application/domain/infrastructure split for the NF-e lifecycle, with dedicated sub-modules for certificates (<code>cert</code>), products (<code>prod</code>), series (<code>serie</code>), import and PDF (DANFE) generation.',
+        comp_crypto: 'Digital-certificate parsing and signing (built on <code>node-forge</code>), kept apart from business modules.',
+        comp_stock: 'Products, entries, exits, suppliers and storage — inventory tracking tied to invoiced items.',
+        comp_backoffice: 'Client management and operational reporting for the business owner using the platform.',
+        comp_auth: 'JWT-based authentication guarding the API.',
+        comp_payment: 'Records a signature/subscription payment entry tied to the user; there is no live payment-gateway integration in the code as it stands today.',
+        s5_heading: 'Technical decisions',
+        dec_1: '<strong>Modular monolith over microservices</strong>: one deployable NestJS app organized into feature modules, matched to the team size and operational budget of the project rather than a distributed-systems approach.',
+        dec_2: '<strong>NF-e emission delegated to a dedicated library</strong> (<code>node-nfe-nfce</code>) wrapping SEFAZ&rsquo;s SOAP/XML contracts, instead of hand-rolling XML signing and web-service calls.',
+        dec_3: '<strong>Certificate handling isolated in its own module</strong>, so certificate parsing/signing logic doesn&rsquo;t leak into business modules.',
+        dec_4: '<strong>Split storage by access pattern</strong>: PostgreSQL (Prisma) for transactional business data, MongoDB (Mongoose) for logs — different write/read patterns use different stores instead of forcing everything into one schema.',
+        dec_5: '<strong>Server-side PDF/DANFE generation</strong> happens after SEFAZ authorization, so the stored document reflects what was actually authorized.',
+        s6_heading: 'Trade-offs',
+        trade_1: 'A modular monolith means NF-e, stock and back-office scale and deploy together; simpler to operate at this size, but there&rsquo;s no independent scaling if NF-e emission under SEFAZ load becomes the bottleneck.',
+        trade_2: 'Relying on a third-party NF-e library trades control over the SOAP/XML layer for faster delivery — bugs or SEFAZ schema changes are bounded by that dependency&rsquo;s release cycle.',
+        trade_3: 'Running MongoDB only for logs alongside a primary PostgreSQL database adds a second datastore to operate for a relatively narrow use case.',
+        trade_4: 'The payment module currently only records a fixed-cost signature entry — there is no live payment-gateway integration in the code today, so anything beyond record-keeping is out of scope as it stands.',
+        s7_heading: 'Resilience &amp; failure handling',
+        s7_body: 'Fault-handling here is mostly what SEFAZ&rsquo;s own contract and the <code>node-nfe-nfce</code> library provide, rather than a custom retry/backoff/circuit-breaker layer on top: synchronous request/response against the SOAP service, status queries for polling authorization results, and correction (CC-e) events for fixing details after issuance. Digital-certificate expiry and SEFAZ&rsquo;s contingency ("ambiente") modes are the realistic failure sources for this kind of integration, and are handled through certificate and environment configuration rather than automated resilience patterns.',
+        s8_heading: 'Results &amp; learnings',
+        s8_body: 'Built with a small team — most of the commit history is mine, with two collaborators — as a working system for MEI fiscal automation, not a project proven at large commercial scale. It&rsquo;s a real integration with a constraint most side projects never touch: digital-certificate signing and a government web-service contract with real consequences for getting it wrong. The main learning was how much of "integration work" in this domain is actually about handling the certificate and SEFAZ&rsquo;s contingency/environment configuration correctly, not just calling an API — plus the full NF-e document lifecycle (emission, cancellation, correction via CC-e).',
+        s9_heading: 'Technologies',
+        s10_heading: 'Related links',
+        link_other_case: 'Zoom Storm case study →',
+        link_home: 'Back to portfolio'
+      }
+    };
+
+    function applyLang(lang) {
+      var dict = I18N[lang] || I18N.en;
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-aria');
+        if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+      });
+      var descMeta = document.querySelector('meta[data-i18n-content]');
+      if (descMeta) descMeta.setAttribute('content', dict.meta_description);
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (btn) {
+        var active = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('bg-amber-500', active);
+        btn.classList.toggle('text-neutral-950', active);
+      });
+
+      localStorage.setItem('lang', lang);
+    }
+
+    (function () {
+      var storedLang = localStorage.getItem('lang');
+      applyLang(storedLang === 'pt' ? 'pt' : 'en');
+
+      document.querySelectorAll('#lang-toggle button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyLang(btn.getAttribute('data-lang'));
+        });
+      });
+
+      var root = document.documentElement;
+      var toggle = document.getElementById('theme-toggle');
+      var sunIcon = document.getElementById('icon-sun');
+      var moonIcon = document.getElementById('icon-moon');
+
+      function reflectIcons() {
+        var isDark = root.classList.contains('dark');
+        sunIcon.classList.toggle('hidden', !isDark);
+        moonIcon.classList.toggle('hidden', isDark);
+      }
+      reflectIcons();
+      renderDiagram(root.classList.contains('dark'));
+
+      toggle.addEventListener('click', function () {
+        var isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        reflectIcons();
+        renderDiagram(isDark);
+      });
+    })();
+  </script>
+</body>
+</html>
